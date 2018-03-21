@@ -24,6 +24,9 @@ int return_startgame(int offset_color);
 int return_startgame2(int offset_color);
 
  void moveball(int startx, int starty);
+ void drawgameinterface(int x, int y, int lx, int ly);
+ void drawstart(int x, int y, int lx, int ly) ;
+ void drawstart2(int x, int y, int lx, int ly)  ;
 
 
 
@@ -417,87 +420,6 @@ void drawedge1(int x, int y, int lx, int ly){
  	
  }
  
-/*void drawgameinterface(int x, int y, int lx, int ly) {
-
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_gameinterface(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-
-
-}
-
- void drawquit(int x, int y, int lx, int ly) {
-
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_quitgame(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-
-
-}
-
- void drawquit2(int x, int y, int lx, int ly) {
-
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_quitgame2(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-
-
-}
-
- void drawstart(int x, int y, int lx, int ly) {
-
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_startgame(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-
-
-}
-
- void drawstart2(int x, int y, int lx, int ly) {
-
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_startgame2(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-
-
-}
-
-*/
 
 void initialize_ymin(){
 	for(int i=0; i<10; i++){
@@ -562,13 +484,19 @@ void draw(){
 	int startball=0;
 	
 	initialize_ymin();
+	
+
 
 	while(gamestate==0){
 		
-		
+		//printf("State %d\n",gamestate);
 
 		while (check==0){
-			if (startball==1) moveball(ballx,bally);
+			if (startball==1) {
+				//printf("In moving ball\n");
+				moveball(ballx,bally);
+				if(gamestate==1) check=1;
+			}
 			read=readSnes();
 			//if (read != 65535) printf("%d\n",read);
 			// left button

@@ -20,23 +20,6 @@ main:
 	// right: 1111111101111111
 	
 	bl draw
-	bl drawstartscreen
-	
-/*
-ask:
-      
-	mov 		r0 , #50000		@ delay program for 50, 000 ms
-	bl 		delayMicroseconds 	
-	bl  		readSnes		@ reads the SNES controller
-	cmp 		r5, r0			@ compare buttons pressed with the previous set
-
-	beq 		ask			@ loop back to ask label
-	mov 		r5, r0			@ buttons that were pressed by user
-	bl  		showPressed   		@ showPressed(buttons pressed by user)
-	bl drawc
-	
-	b ask
-*/
 
 	@ stop
 	haltLoop$:
