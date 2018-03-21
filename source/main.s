@@ -20,6 +20,7 @@ main:
 	// right: 1111111101111111
 	
 	bl draw
+	bl drawstartscreen
 	
 /*
 ask:
