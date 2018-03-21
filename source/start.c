@@ -103,6 +103,6 @@ void drawstartscreen(){
 	drawgameinterface(100,100,1024,704);
 	drawstart(500,300,320,160);
 	drawstart2(700,300,320,160);
-	drawquit(700,500,320,160);
-	drawquit2(500,500,320,160);
+	//drawquit(700,500,320,160);
+	//drawquit2(500,500,320,160);
 }

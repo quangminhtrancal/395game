@@ -19,26 +19,20 @@ main:
 	// left:  1111111110111111
 	// right: 1111111101111111
 	
+
+	//bl drawstartscreen
 	bl draw
 
 	@ stop
 	haltLoop$:
 		b	haltLoop$
 
-.globl te
-te:
-	push {lr}
-	mov r1, #1
-	mov r2, #2
-	ldr r0, =testMsg
-	bl printf
-	pop {pc}
 
 @ Data section
 .section .data
 
 .align 
-
+  
 
 .globl frameBufferInfo
 frameBufferInfo:

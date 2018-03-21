@@ -56,8 +56,8 @@ int height_Hborder=32;
 int width_bggame=960; 
 int height_bggame=640;
 
-int paddlegap=30;		//paddle distance from bottom
-int brickgap=90;		//distance of bricks from the top
+int paddlegap=64;		//paddle distance from bottom
+int brickgap=32;		//distance of bricks from the top
 
 int paddlex;
 int paddley;
@@ -439,16 +439,15 @@ void draw(){
 	//drawquit2(500,500,320,160);
 
 	
-	originx=50;
-	originy=50;
+
 	
 	
 	paddlex=originx+width_bggame/2-width_paddle/2;
 	paddley=originy+height_bggame-paddlegap;
 	ballx=originx+width_bggame/2-width_ball/2;
 	bally=paddley-32;
-	// pivot point is 500, 100 meaning 0,0
-
+	// pivot point is originx, originy meaning 0,0
+	
 	
 	draw_totalback(originx,originy,32,32,32);
 	
@@ -469,7 +468,7 @@ void draw(){
 	drabdH(originx,originy+height_bggame,width_Hborder,height_Hborder);		//bottom border
 	drabdV(originx+width_bggame,originy,width_Vborder,height_Vborder);		//right border
 	
-	drawedge1(originx-32,originy-32,32,32);		//I don't know where the image file for the corner is
+	drawedge1(originx-32,originy-32,32,32);		
  	drawedge2(originx+width_bggame,originy-32,32,32);
  	drawedge3(originx-32,originy+height_bggame,32,32);
  	drawedge4(originx+width_bggame,originy+height_bggame,32,32);
@@ -482,6 +481,7 @@ void draw(){
 	int previousbutton=0;
 	int speed=0;
 	int startball=0;
+
 	
 	initialize_ymin();
 	
@@ -492,73 +492,80 @@ void draw(){
 		//printf("State %d\n",gamestate);
 
 		while (check==0){
-			if (startball==1) {
-				//printf("In moving ball\n");
-				moveball(ballx,bally);
-				if(gamestate==1) check=1;
-			}
-			read=readSnes();
-			//if (read != 65535) printf("%d\n",read);
-			// left button
-			if (read==65471){
-				check=1;
-				// speed is used to check if the button is pressed repeatedly
-				speed=0;
-				leftmove(speed);
-				read=0xFFFF;
-				speed=0;
-			}
-			// right button is clicked
-			else if (read==65407){
-				check=1;
-				// speed is used to check if the button is pressed repeatedly
-				speed=0;
-				rightmove(speed);
-				read=0xFFFF;
-				speed=0;
-			}
 			// if B button is pressed- ball release
-			else if (read==65534){
-				//printf("x=%d y=%d\n",ballx,bally);
+			//printf("State %d startball=%d check=%d\n",gamestate, startball, check);
+			read=readSnes();
+			if (read==65534){
+				printf("B is pressed");
 				startball=1;
 				
 			}
-			// If A and right move is pressed
-			else if (read==65151){
-				if (previousbutton==read){
-					count++;
-					if ((count>=10) && (count<=20)) speed=1;
-					if ((count>20)&& (count<=30)) speed=2;
-					if (count>30)	speed=3;
-				}
-				if (previousbutton!=read) {
-					count=0;
-				}
+			if (startball==1){
 
-				rightmove(speed);
-				read=0xFFFF;
-				speed=0;
-				previousbutton=65151;	
+						//printf("In moving ball\n");
+						moveball(ballx,bally);
+						if(gamestate==1) check=1;
+
+					
+					//if (read != 65535) printf("%d\n",read);
+					// left button
+					if (read==65471){
+						check=1;
+						// speed is used to check if the button is pressed repeatedly
+						speed=0;
+						leftmove(speed);
+						read=0xFFFF;
+						speed=0;
+					}
+					// right button is clicked
+					else if (read==65407){
+						check=1;
+						// speed is used to check if the button is pressed repeatedly
+						speed=0;
+						rightmove(speed);
+						read=0xFFFF;
+						speed=0;
+					}
+
+					// If A and right move is pressed
+					else if (read==65151){
+						if (previousbutton==read){
+							count++;
+							if ((count>=10) && (count<=20)) speed=1;
+							if ((count>20)&& (count<=30)) speed=2;
+							if (count>30)	speed=3;
+						}
+						if (previousbutton!=read) {
+							count=0;
+						}
+
+						rightmove(speed);
+						read=0xFFFF;
+						speed=0;
+						previousbutton=65151;	
+					}
+					// If A and left move is pressed
+					else if (read==65215){
+						if (previousbutton==read){
+							count++;
+							if ((count>=10) && (count<=20)) speed=1;
+							if ((count>20)&& (count<=30)) speed=2;
+							if (count>30)	speed=3;
+						}
+						if (previousbutton!=read) {
+							count=0;
+						}
+
+						leftmove(speed);
+						read=0xFFFF;
+						speed=0;
+						previousbutton=65215;	
+					}
+
+					delay(5);
+						
 			}
-			// If A and left move is pressed
-			else if (read==65215){
-				if (previousbutton==read){
-					count++;
-					if ((count>=10) && (count<=20)) speed=1;
-					if ((count>20)&& (count<=30)) speed=2;
-					if (count>30)	speed=3;
-				}
-				if (previousbutton!=read) {
-					count=0;
-				}
 
-				leftmove(speed);
-				read=0xFFFF;
-				speed=0;
-				previousbutton=65215;	
-			}
-
-			delay(5);
 			
 		}
 		check=0;

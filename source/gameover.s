@@ -3,7 +3,7 @@
 // Take r0 as the offset for the image color location
 .global return_gameover
 
-return_yellowbrick:
+return_gameover:
 	push	{r4, r5,lr}
 	ldr	r4, =gameover
 	mov	r5, r0				// save the offset
