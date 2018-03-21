@@ -27,6 +27,12 @@ int height_bggame;
 int paddlegap;
 int brickgap;
 
+
+int prevslowballx;
+int prevslowbally;
+int slowballx;
+int slowbally;
+
 int paddlex;
 int paddley;
 int prevballx;
@@ -92,6 +98,7 @@ int gamearray[20][30];
 		
 		clearball(prevballx,prevbally,width_ball,height_ball);
 		drawball(ballx,bally,width_ball,height_ball);
+		
 		if ((ballx+dx>originx+width_bggame-width_ball) ||(ballx+dx<originx)){
 			dx=-dx;
 		}
@@ -135,11 +142,23 @@ int gamearray[20][30];
 				bricky=miny[index];
 			}
 			clearbrick(brickx,bricky,width_brick,height_brick);
+						
+
+				slowballx = brickx;
+				slowbally,prevslowbally = bricky;
+				printf("BRICK X: %d\n", brickx);
+				printf("BRICK Y: %d\n", bricky);
+
+			
 		}
+		clearslowball(slowballx,prevslowbally,width_brick,height_brick);
+		drawslowball(slowballx,slowbally,width_brick,height_brick);
+		prevslowbally= slowbally;
+		slowbally += 1;
+		
 		delay(5);
 		prevballx = ballx;
 		prevbally = bally;
-		//clearball(ballx,bally,width_ball,height_ball);
 		ballx+=dx;
 		bally+=dy;
 	
