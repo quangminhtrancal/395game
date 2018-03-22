@@ -111,6 +111,35 @@ void clearball(int x, int y, int lx, int ly){
 	
 }
 
+
+void drawslowball(int x, int y, int lx, int ly){
+	int offset_color=0;
+	int color=0;
+	for (int i=0;i<ly;i++){
+		for (int j=0; j<lx; j++){
+			color=return_bigpaddle(offset_color);
+			DrawPixel(x+j,y+i,color);
+			offset_color+=4;
+		}
+	}
+	
+}
+
+void clearslowball(int x, int y, int lx, int ly){
+	
+	int offset_color=0;
+	int color=0;
+
+	for (int i=0;i<ly;i++){
+		for (int j=0; j<lx; j++){
+			color=background;
+			DrawPixel(x+j,y+i,color);
+			offset_color+=4;
+		}
+	}
+	
+}
+
 // size of paddle is 80x20
 void drawpaddle(int x, int y, int lx, int ly){
 
@@ -522,10 +551,8 @@ void draw(){
 	drawgreenb(originx,originy+brickgap+height_brick,width_brick,height_brick);	//draw green bricks
 	drawwhiteb(originx,originy+brickgap+2*height_brick,width_brick,height_brick);//draw white bricks
 	
-	drawpaddle(paddlex,paddley,width_paddle,height_paddle);
-	drawball(ballx,bally,width_ball,height_ball);
-	
-	
+	drawpaddle(paddlex,paddley,width_paddle,height_paddle);						//draw paddle @ start position
+	drawball(ballx,bally,width_ball,height_ball);								//draw ball @ start position
 
 	drabdH(originx,originy-height_Hborder,width_Hborder,height_Hborder);	//top border
 	drabdV(originx-width_Vborder,originy,width_Vborder,height_Vborder);		//left border
