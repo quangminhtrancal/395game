@@ -27,12 +27,6 @@ int height_bggame;
 int paddlegap;
 int brickgap;
 
-
-int prevslowballx;
-int prevslowbally;
-int slowballx;
-int slowbally;
-
 int paddlex;
 int paddley;
 int prevballx;
@@ -113,7 +107,6 @@ int reversey(int indexy){
 		
 		clearball(prevballx,prevbally,width_ball,height_ball);
 		drawball(ballx,bally,width_ball,height_ball);
-<<<<<<< HEAD
 		//printmemory();
 
 		
@@ -128,10 +121,6 @@ int reversey(int indexy){
 
 		if ((next_xball<=0) || (next_xball>29)) {
 			printf(" touch left x index=%d y index=%d \n",next_xball,next_yball);
-=======
-		
-		if ((ballx+dx>originx+width_bggame-width_ball) ||(ballx+dx<originx)){
->>>>>>> 157f5236c3db418e5e87fdef8682f13005305fa5
 			dx=-dx;
 		}
 		if ((next_yball >17)&&(gamearray[next_yball][next_xball]==0)){
@@ -174,7 +163,6 @@ int reversey(int indexy){
 				dy=-2;
 				
 			}
-<<<<<<< HEAD
 			// at middle of the paddle
 		if (gamearray[next_yball][next_xball]==11){
 				printf("In middle\n");
@@ -182,26 +170,11 @@ int reversey(int indexy){
 
 		}
 
-=======
-			clearbrick(brickx,bricky,width_brick,height_brick);
-						
-
-				slowballx = brickx;
-				slowbally,prevslowbally = bricky;
-				printf("BRICK X: %d\n", brickx);
-				printf("BRICK Y: %d\n", bricky);
-
-			
-		}
-		clearslowball(slowballx,prevslowbally,width_brick,height_brick);
-		drawslowball(slowballx,slowbally,width_brick,height_brick);
-		prevslowbally= slowbally;
-		slowbally += 1;
->>>>>>> 157f5236c3db418e5e87fdef8682f13005305fa5
 		
 		delay(5);
 		prevballx = ballx;
 		prevbally = bally;
+		//clearball(ballx,bally,width_ball,height_ball);
 		ballx+=dx;
 		bally+=dy;
 	
