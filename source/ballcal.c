@@ -76,8 +76,8 @@ int convert_y(int y);
 		  for (int j=0; j<30;j++)
 		  {
 			  gamearray[i][j]=0;
-			  if (i==18) gamearray[18][j]=11;
-			  else if ((i==0) || (i==19)) gamearray[i][j]=9;
+			  //if (i==18) gamearray[18][j]=11;
+			  if ((i==0) || (i==19)) gamearray[i][j]=9;
 
 		  }
 	  }
@@ -204,12 +204,13 @@ int convert_ycorner(int y){
 		
 		
 
-
+	printf("real tlx=%d realt tly=%d next blx=%d next bly=%d \n",a,b,next_xbl,next_ybl);
 
 	//	printf("ballx=%d bally=%d dx=%d dy=%d tl=%d tr=%d bl=%d br=%d\n",ballx,bally,dx,dy,gamearray[next_ytl][next_xtl],gamearray[next_ytr][next_xtr],gamearray[next_ybl][next_xbl],gamearray[next_ybr][next_xbr]);
 		//printmemory();
 		
-		if ((next_ybl >18)&&(gamearray[next_ybl][next_xbl]==9)){
+		if (b >originy+height_bggame-30){
+
 				gamestate=1;
 				printf("STOP\n");
 				drawgameover(originx+width_bg/2-width_gameover/2,originy+height_bg/2-height_gameover/2,width_gameover,height_gameover);
@@ -218,7 +219,7 @@ int convert_ycorner(int y){
 		
 		
 		// CASE for change x direction -----------------------------------------------------------------------------------------
-		if ((next_xtl<=0) && (a <50)) {
+		if ((next_xtl<=0) && (a <originx)) {
 			printf("real tlx=%d realt tly=%d next tlx=%d next tly=%d \n",a,b,next_xtl,next_ytl);
 			
 			dx=-dx;
@@ -241,7 +242,7 @@ int convert_ycorner(int y){
 		
 		
 		// at the edge of the paddle
-		if (gamearray[next_ybl][next_xbl]==10)
+		if ((gamearray[next_ybl][next_xbl]==10))
 			{
 				//printf("In edge\n");
 				dy=-ang_valu;
@@ -352,7 +353,7 @@ int convert_ycorner(int y){
 			else if ((tlhas>0)&&(trhas>0)&&(brhas==0)){ // 110 there are bricks on top left and top right
 
 				dy=-dy;
-				printf("In here %d %d %d\n",tlhas,trhas,dy);
+				//printf("In here %d %d %d\n",tlhas,trhas,dy);
 				//dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xtr,next_ytr,trhas);
