@@ -12,8 +12,8 @@ main:
 	
 
 
-	bl begingame
-	//bl draw
+	//bl begingame
+	bl draw
 
 	@ stop
 	haltLoop$:
