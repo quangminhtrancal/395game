@@ -110,17 +110,84 @@ int reversey(int indexy){
 		//printmemory();
 
 		
-		int xball_in=convert_x(ballx);
-		int yball_in=convert_y(bally);
+		//int xball_in=convert_x(ballx);
+		//int yball_in=convert_y(bally);
 		int next_xball;
 		int next_yball;
+		
+		int next_xball2;
+		int next_yball2;
+
+		int x_topleft;
+		int y_topleft;
+		int x_topright;
+		int y_topright;
+		
+		int x_bottomleft;
+		int y_bottomleft;
+		int x_bottomright;
+		int y_bottomright;
+		
+		x_topleft=ballx;
+		y_topleft=bally;
+		x_topright=ballx+width_ball;
+		y_topright=bally;
+		
+		x_bottomleft=ballx;
+		y_bottomleft=bally+height_ball;
+		x_bottomright=ballx+width_ball;
+		y_bottomright=bally+height_ball;
+
+		if(dy>0){
+			next_xball=x_bottomright+dx;
+			next_yball=y_bottomright+dy;
+			
+			next_xball2=x_bottomleft+dx;
+			next_yball2=y_bottomleft+dy;
+		}
+		else if (dy<0){
+			next_xball=x_topright+dx;
+			next_yball=y_topright+dy;
+			next_xball2=x_topleft+dx;
+			next_yball2=y_topleft+dy;
+		}
+		/*
+		if ((dx>0)&&(dy>0)){
+			next_xball=x_bottomright+dx;
+			next_yball=y_bottomright+dy;
+		}
+		else if ((dx>0)&&(dy<0)){
+			next_xball=x_topright+dx;
+			next_yball=y_topright+dy;
+		}
+		else if ((dx<0)&&(dy>0)){
+			next_xball=x_bottomleft+dx;
+			next_yball=y_bottomleft+dy;
+		}
+		else if ((dx<0)&&(dy<0)){
+			next_xball=x_topleft+dx;
+			next_yball=y_topleft+dy;
+		}
+		*/
+
+		next_xball=convert_x(next_xball);
+		next_yball=convert_y(next_yball);
+		
+		next_xball2=convert_x(next_xball2);
+		next_yball2=convert_y(next_yball2);
+
+
+				//printf("location ballx=%d bally=%d nextx=%d nexty=%d value=%d\n",ballx,bally,next_xball,next_yball,gamearray[next_yball][next_xball]);
+		/*
 		if (dx<0) next_xball=convert_x(ballx+dx);
 		if (dx>0) next_xball=convert_x(ballx+dx+width_ball);
 		if (dy<0) next_yball=convert_y(bally+dy);
 		if (dy>0) next_yball=convert_y(bally+dy+height_ball);
+*/
 
+		// Check the first point -----------------------------------------------------------------
 		if ((next_xball<=0) || (next_xball>29)) {
-			printf(" touch left x index=%d y index=%d \n",next_xball,next_yball);
+			printf(" touch left side x index=%d y index=%d \n",next_xball,next_yball);
 			dx=-dx;
 		}
 		if ((next_yball >17)&&(gamearray[next_yball][next_xball]==0)){
@@ -129,7 +196,8 @@ int reversey(int indexy){
 				drawgameover(originx+width_bg/2-width_gameover/2,originy+height_bg/2-height_gameover/2,width_gameover,height_gameover);
 		}
 		if(gamearray[next_yball][next_xball]==6){
-			printf("Touch brick\n");
+			printf("Touch brick right point\n");
+			printf("location ballx=%d bally=%d nextx=%d nexty=%d value=%d dx=%d dy=%d\n",ballx,bally,next_xball,next_yball,gamearray[next_yball][next_xball],dx,dy);
 
 			int a=reversex(next_xball);
 			int b=reversey(next_yball);
@@ -142,7 +210,7 @@ int reversey(int indexy){
 			drawwhitebrick(reversex(next_xball),reversey(next_yball),width_brick,height_brick);//draw white bricks
 			 dy=-dy;
 		}
-		if(gamearray[yball_in][next_xball]==8){
+		if(gamearray[next_yball][next_xball]==8){
 			 clearbrick(reversex(next_xball),reversey(next_yball),width_brick,height_brick);
 			drawgreenbrick(reversex(next_xball),reversey(next_yball),width_brick,height_brick);	//draw green bricks
 			dy=-dy;
@@ -151,7 +219,8 @@ int reversey(int indexy){
 			dy=-dy;
 		}
 		if((gamearray[next_yball][next_xball]==9) && (next_yball>17)){
-				
+				clearball(prevballx,prevbally,width_ball,height_ball);
+				drawball(ballx,bally,width_ball,height_ball);
 				gamestate=1;
 				printf("STOP\n");
 				drawgameover(originx+width_bg/2-width_gameover/2,originy+height_bg/2-height_gameover/2,width_gameover,height_gameover);
@@ -160,16 +229,71 @@ int reversey(int indexy){
 		if (gamearray[next_yball][next_xball]==10)
 			{
 				printf("In edge\n");
-				dy=-2;
+				dy=-1;
 				
 			}
 			// at middle of the paddle
 		if (gamearray[next_yball][next_xball]==11){
 				printf("In middle\n");
+				dy=-2;
+
+		}
+		
+		
+		// Check the second point -----------------------------------------------------------------
+		if ((next_xball2<=0) || (next_xball2>29)) {
+			printf(" touch left x index=%d y index=%d \n",next_xball2,next_yball2);
+			dx=-dx;
+		}
+		if ((next_yball2 >17)&&(gamearray[next_yball2][next_xball2]==0)){
+				gamestate=1;
+				printf("STOP\n");
+				drawgameover(originx+width_bg/2-width_gameover/2,originy+height_bg/2-height_gameover/2,width_gameover,height_gameover);
+		}
+		if(gamearray[next_yball2][next_xball2]==6){
+			printf("Touch brick left point\n");
+			printf("location ballx=%d bally=%d nextx=%d nexty=%d value=%d dx=%d dy=%d\n",ballx,bally,next_xball2,next_yball2,gamearray[next_yball2][next_xball2],dx,dy);
+
+			int a=reversex(next_xball2);
+			int b=reversey(next_yball2);
+			printf(" index=%d  indey=%d\n",a,b);
+			 clearbrick(reversex(next_xball2),reversey(next_yball2),width_brick,height_brick);
+			 dy=-dy;
+		}
+		if(gamearray[next_yball2][next_xball2]==7){
+			clearbrick(reversex(next_xball2),reversey(next_yball2),width_brick,height_brick);
+			drawwhitebrick(reversex(next_xball2),reversey(next_yball2),width_brick,height_brick);//draw white bricks
+			 dy=-dy;
+		}
+		if(gamearray[next_yball2][next_xball2]==8){
+			 clearbrick(reversex(next_xball2),reversey(next_yball2),width_brick,height_brick);
+			drawgreenbrick(reversex(next_xball2),reversey(next_yball2),width_brick,height_brick);	//draw green bricks
+			dy=-dy;
+		}
+		if((gamearray[next_yball2][next_xball2]==9) && (next_yball2==0)){
+			dy=-dy;
+		}
+		if((gamearray[next_yball2][next_xball2]==9) && (next_yball2>17)){
+				clearball(prevballx,prevbally,width_ball,height_ball);
+				drawball(ballx,bally,width_ball,height_ball);
+				gamestate=1;
+				printf("STOP\n");
+				drawgameover(originx+width_bg/2-width_gameover/2,originy+height_bg/2-height_gameover/2,width_gameover,height_gameover);
+		}
+		// at the edge of the paddle
+		if (gamearray[next_yball2][next_xball2]==10)
+			{
+				printf("In edge\n");
+				dy=-2;
+				
+			}
+			// at middle of the paddle
+		if (gamearray[next_yball2][next_xball2]==11){
+				printf("In middle\n");
 				dy=-4;
 
 		}
-
+		
 		
 		delay(5);
 		prevballx = ballx;
