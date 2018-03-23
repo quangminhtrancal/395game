@@ -108,8 +108,8 @@ int reversey(int indexy){
  }
  int checkbrick(int brickvalue){
 	if (brickvalue==6) return 1;
-	if (brickvalue==7) return 2;
-	if (brickvalue==8) return 3;
+	else if (brickvalue==7) return 2;
+	else if (brickvalue==8) return 3;
 	return 0;
  }
  void treatbrick(int nextx, int nexty, int category){
@@ -204,9 +204,10 @@ int convert_ycorner(int y){
 		
 		
 
-//	printmemory();
 
-	
+
+	//	printf("ballx=%d bally=%d dx=%d dy=%d tl=%d tr=%d bl=%d br=%d\n",ballx,bally,dx,dy,gamearray[next_ytl][next_xtl],gamearray[next_ytr][next_xtr],gamearray[next_ybl][next_xbl],gamearray[next_ybr][next_xbr]);
+		//printmemory();
 		
 		if ((next_ybl >18)&&(gamearray[next_ybl][next_xbl]==9)){
 				gamestate=1;
@@ -256,7 +257,7 @@ int convert_ycorner(int y){
 		
 		// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$   CASE for checking collision with brick $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 		
-			if ((dx<0) && (dy<0))  // Check three points tl, t, l  ->tl,tr,bl
+		if ((dx<0) && (dy<0))  // Check three points tl, t, l  ->tl,tr,bl
 		{
 			int tl=gamearray[next_ytl][next_xtl];
 			int tr=gamearray[next_ytr][next_xtr];
@@ -274,33 +275,33 @@ int convert_ycorner(int y){
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
 			
-			if ((tlhas==0)&&(trhas>0)&&(blhas==0)){ // 010 there is only brick at top 
+			else if ((tlhas==0)&&(trhas>0)&&(blhas==0)){ // 010 there is only brick at top 
 				dy=-dy;
 				treatbrick(next_xtr,next_ytr,trhas);
 			}
-			if ((tlhas==0)&&(trhas>0)&&(blhas>0)){ // 011 there are bricks at top and left
+			else if ((tlhas==0)&&(trhas>0)&&(blhas>0)){ // 011 there are bricks at top and left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtr,next_ytr,trhas);
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
-			if ((tlhas>0)&&(trhas==0)&&(blhas==0)){ // 100 there is only brick at the top left
+			else if ((tlhas>0)&&(trhas==0)&&(blhas==0)){ // 100 there is only brick at the top left
 				dy=-dy;
 				treatbrick(next_xtl,next_ytl,tlhas);
 			}
-			if ((tlhas>0)&&(trhas==0)&&(blhas>0)){ // 101 there are bricks on top left and left
+			else if ((tlhas>0)&&(trhas==0)&&(blhas>0)){ // 101 there are bricks on top left and left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
-			if ((tlhas>0)&&(trhas>0)&&(blhas==0)){ // 110 there are bricks on top left and top right
+			else if ((tlhas>0)&&(trhas>0)&&(blhas==0)){ // 110 there are bricks on top left and top right
 				dy=-dy;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xtr,next_ytr,trhas);
 			}
 
-			if ((tlhas>0)&&(trhas>0)&&(blhas>0)){ // 111 there are bricks on top left and top and left
+			else if ((tlhas>0)&&(trhas>0)&&(blhas>0)){ // 111 there are bricks on top left and top and left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
@@ -310,7 +311,8 @@ int convert_ycorner(int y){
 		}
 		
 	
-		if ((dx>0) && (dy<0)){  // Check three points -> t-tr-r  -> tl,tr,br
+		else if ((dx>0) && (dy<0)){  // Check three points -> t-tr-r  -> tl,tr,br
+
 			int tl=gamearray[next_ytl][next_xtl];
 			int tr=gamearray[next_ytr][next_xtr];
 			int br=gamearray[next_ybr][next_xbr];
@@ -327,34 +329,36 @@ int convert_ycorner(int y){
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
 			
-			if ((tlhas==0)&&(trhas>0)&&(brhas==0)){ // 010 there is only brick at top right
+			else if ((tlhas==0)&&(trhas>0)&&(brhas==0)){ // 010 there is only brick at top right
 				dy=-dy;
 				treatbrick(next_xtr,next_ytr,trhas);
 			}
-			if ((tlhas==0)&&(trhas>0)&&(brhas>0)){ // 011 there are bricks at top right and bottom right
+			else if ((tlhas==0)&&(trhas>0)&&(brhas>0)){ // 011 there are bricks at top right and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtr,next_ytr,trhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((tlhas>0)&&(trhas==0)&&(brhas==0)){ // 100 there is only brick at the top left
+			else if ((tlhas>0)&&(trhas==0)&&(brhas==0)){ // 100 there is only brick at the top left
 				dy=-dy;
 				treatbrick(next_xtl,next_ytl,tlhas);
 			}
-			if ((tlhas>0)&&(trhas==0)&&(brhas>0)){ // 101 there are bricks on top left and bottom right
+			else if ((tlhas>0)&&(trhas==0)&&(brhas>0)){ // 101 there are bricks on top left and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((tlhas>0)&&(trhas>0)&&(brhas==0)){ // 110 there are bricks on top left and top right
+			else if ((tlhas>0)&&(trhas>0)&&(brhas==0)){ // 110 there are bricks on top left and top right
+
 				dy=-dy;
+				printf("In here %d %d %d\n",tlhas,trhas,dy);
 				//dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xtr,next_ytr,trhas);
 			}
 
-			if ((tlhas>0)&&(trhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom right
+			else if ((tlhas>0)&&(trhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
@@ -364,7 +368,7 @@ int convert_ycorner(int y){
 		}
 
 
-		if ((dx<0) && (dy>0)){  // Check three points l,bl,b-> tl, bl, br 
+		else if ((dx<0) && (dy>0)){  // Check three points l,bl,b-> tl, bl, br 
 			int tl=gamearray[next_ytl][next_xtl];
 			int bl=gamearray[next_ybl][next_xbl];
 			int br=gamearray[next_ybr][next_xbr];
@@ -382,34 +386,34 @@ int convert_ycorner(int y){
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
 			
-			if ((tlhas==0)&&(blhas>0)&&(brhas==0)){ // 010 there is only brick at bottomleft
+			else if ((tlhas==0)&&(blhas>0)&&(brhas==0)){ // 010 there is only brick at bottomleft
 				dy=-dy;
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
-			if ((tlhas==0)&&(blhas>0)&&(brhas>0)){ // 011 there are bricks at bottom left and bottom right
+			else if ((tlhas==0)&&(blhas>0)&&(brhas>0)){ // 011 there are bricks at bottom left and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xbl,next_ybl,blhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((tlhas>0)&&(blhas==0)&&(brhas==0)){ // 100 there is only brick at the top left
+			else if ((tlhas>0)&&(blhas==0)&&(brhas==0)){ // 100 there is only brick at the top left
 				dy=-dy;
 				treatbrick(next_xtl,next_ytl,tlhas);
 			}
-			if ((tlhas>0)&&(blhas==0)&&(brhas>0)){ // 101 there are bricks on top left and bottom right
+			else if ((tlhas>0)&&(blhas==0)&&(brhas>0)){ // 101 there are bricks on top left and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((tlhas>0)&&(blhas>0)&&(brhas==0)){ // 110 there are bricks on top left and top right
+			else if ((tlhas>0)&&(blhas>0)&&(brhas==0)){ // 110 there are bricks on top left and top right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
 
-			if ((tlhas>0)&&(blhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom left
+			else if ((tlhas>0)&&(blhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtl,next_ytl,tlhas);
@@ -418,7 +422,7 @@ int convert_ycorner(int y){
 			}	
 		}
 		
-		if ((dx>0) && (dy>0)){  // Check three points r, b,br ->tr, bl, br  
+		else if ((dx>0) && (dy>0)){  // Check three points r, b,br ->tr, bl, br  
 			int tr=gamearray[next_ytr][next_xtr];
 			int bl=gamearray[next_ybl][next_xbl];
 			int br=gamearray[next_ybr][next_xbr];
@@ -436,34 +440,34 @@ int convert_ycorner(int y){
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
 			
-			if ((trhas==0)&&(blhas>0)&&(brhas==0)){ // 010 there is only brick at bottomleft
+			else if ((trhas==0)&&(blhas>0)&&(brhas==0)){ // 010 there is only brick at bottomleft
 				dy=-dy;
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
-			if ((trhas==0)&&(blhas>0)&&(brhas>0)){ // 011 there are bricks at bottom left and bottom right
+			else if ((trhas==0)&&(blhas>0)&&(brhas>0)){ // 011 there are bricks at bottom left and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xbl,next_ybl,blhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((trhas>0)&&(blhas==0)&&(brhas==0)){ // 100 there is only brick at the top right
+			else if ((trhas>0)&&(blhas==0)&&(brhas==0)){ // 100 there is only brick at the top right
 				dy=-dy;
 				treatbrick(next_xtr,next_ytr,trhas);
 			}
-			if ((trhas>0)&&(blhas==0)&&(brhas>0)){ // 101 there are bricks on top right and bottom right
+			else if ((trhas>0)&&(blhas==0)&&(brhas>0)){ // 101 there are bricks on top right and bottom right
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtr,next_ytr,trhas);
 				treatbrick(next_xbr,next_ybr,brhas);
 			}
-			if ((trhas>0)&&(blhas>0)&&(brhas==0)){ // 110 there are bricks on top right and bottom left
+			else if ((trhas>0)&&(blhas>0)&&(brhas==0)){ // 110 there are bricks on top right and bottom left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtr,next_ytr,trhas);
 				treatbrick(next_xbl,next_ybl,blhas);
 			}
 
-			if ((trhas>0)&&(blhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom left
+			else if ((trhas>0)&&(blhas>0)&&(brhas>0)){ // 111 there are bricks on top left and top right and bottom left
 				dy=-dy;
 				dx=-dx;
 				treatbrick(next_xtr,next_ytr,trhas);
