@@ -72,6 +72,9 @@ int bally;
 int miny[10];
 int gamestate=0;
 int gamearray[20][30];
+int dx;
+int dy;
+int ang_valu;
 
 // Size of ball is 20x20
 void drawball(int x, int y, int lx, int ly){
@@ -531,7 +534,7 @@ void printmemory(){
 	}
 }
 
-void draw(){
+void draw(){	
 	
 	
 	initialize_gamearray();
@@ -579,6 +582,9 @@ void draw(){
 	
 
 	printmemory();
+	
+	dx=ang_valu;
+	dy=ang_valu;
 
 
 	while(gamestate==0){
