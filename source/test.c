@@ -523,7 +523,7 @@ int convert_x(int x){
 }
 
 int convert_y(int y){
-	return ((y-originx)/32);
+	return ((y-originy)/32);
 }
 void printmemory(){
 	for(int i=0; i<20; i++){
