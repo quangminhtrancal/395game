@@ -48,6 +48,12 @@ int trigbig=7;
 int triggerslowball;
 int triggerbigpaddle;
 
+int sbx; // check x position of slow ball symbol
+int sby;	// check y position of slow ball symbol
+
+int bpx;	// check x position of big paddle symbol
+int bpy;	// check y position of big paddle symbol
+
 /* To represent the memory of the tile of the game
  =0: no element
 = 10: paddle outside; 11 paddle inside
@@ -83,7 +89,7 @@ void checkvaluepack();
 		  for (int j=0; j<30;j++)
 		  {
 			  gamearray[i][j]=0;
-			  if (i==18) gamearray[18][j]=11;
+			  //if (i==18) gamearray[18][j]=11;
 			  if ((i==0) || (i==19)) gamearray[i][j]=9;
 
 		  }
@@ -122,7 +128,8 @@ int reversey(int indexy){
  void treatbrick(int nextx, int nexty, int category){
  	if (category==1) {
 		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
-		printf("nextx=%d nexty=%d\n",nextx,nexty);
+
+		// Setting to define the column of white brick which has the trigger for the value pack
 		if (nextx/3==trigslow) {
 			triggerslowball=1;
 		}
@@ -155,7 +162,7 @@ int convert_ycorner(int y){
 		clearball(prevballx,prevbally,width_ball,height_ball);
 		drawball(ballx,bally,width_ball,height_ball);
 
-	
+		printf("Speed value=%d\n",ang_valu);
 		int next_xtl;
 		int next_ytl;
 		
@@ -234,7 +241,7 @@ int convert_ycorner(int y){
 		
 		// CASE for change x direction -----------------------------------------------------------------------------------------
 		if ((next_xtl<=0) && (a <originx)) {
-			printf("real tlx=%d realt tly=%d next tlx=%d next tly=%d \n",a,b,next_xtl,next_ytl);
+//			printf("real tlx=%d realt tly=%d next tlx=%d next tly=%d \n",a,b,next_xtl,next_ytl);
 			
 			dx=-dx;
 		}

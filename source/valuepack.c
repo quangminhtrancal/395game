@@ -26,8 +26,15 @@ int sby=0;	// check y position of slow ball symbol
 int bpx=0;	// check x position of big paddle symbol
 int bpy=0;	// check y position of big paddle symbol
 
+int width_paddle; 
+int height_paddle; 
+
 int convert_x(int x);
 int convert_y(int y);
+
+int convert_x(int x);
+int convert_y(int y);
+int gamearray[20][30];
 
 
 // slow ball symbol
@@ -105,17 +112,15 @@ void drawbigpaddle(int x, int y, int lx, int ly){
 	int indexx=convert_x(x);
 	int indexy=convert_y(y);
 	gamearray[indexy][indexx]=10;
-	gamearray[indexy][indexx+1]=10;
+	gamearray[indexy][indexx+1]=11;
 	gamearray[indexy][indexx+2]=11;
 	gamearray[indexy][indexx+3]=11;
-	gamearray[indexy][indexx+4]=10;
+	gamearray[indexy][indexx+4]=11;
 	gamearray[indexy][indexx+5]=10;	
 }
 
-void cleabigrpaddle(int x, int y, int lx, int ly){
+void clearbigpaddle(int x, int y, int lx, int ly){
 	
-	//	te();
-		
 	int offset_color=0;
 	int color=0;
 
@@ -136,32 +141,68 @@ void cleabigrpaddle(int x, int y, int lx, int ly){
 	
 }
 
-int checkpaddletouch(){
+int checkpaddletouch(int bx, int xy){
+	
 }
 
 
 void checkvaluepack(){
 	if(triggerslowball==1){
 		if (receiveslowball==0){
-			//sbx=
-			clearslowball_symbol(originx+trigslow*96,originy+3*32+increaseslow-2,96,32);
-			drawslowball_symbol(originx+trigslow*96,originy+3*32+increaseslow,96,32);
-			increaseslow+=2;
+			sbx=originx+trigslow*96;
+			sby=originy+3*32+increaseslow;
+			clearslowball_symbol(sbx,sby-2,96,32);
+			int indexx=convert_x(sbx);
+			int indexy=convert_y(sby);
+			if ((gamearray[indexy][indexx]==10)||(gamearray[indexy][indexx]==11)){
+							clearslowball_symbol(sbx,sby-2,96,32);
+							drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+							receiveslowball=1;
+			}
+			else if (gamearray[indexy][indexx]==9){
+				clearslowball_symbol(sbx,sby-2,96,32);
+			}
+			else{
+				
+				drawslowball_symbol(sbx,sby,96,32);
+				increaseslow+=2;
+			}
 		}
-		else if (receiveslowball==1) {
-			clearslowball_symbol(originx+trigslow*96,originy+3*32+increaseslow-2,96,32);
+		else if (receiveslowball==1){
 			ang_valu=1;
 		}
+
 	}
 	if(triggerbigpaddle==1){
-		
+	
 		if (receivebpaddle==0){
-			clearpaddle_symbol(originx+trigslow*96,originy+3*32+increasebig-2,96,32);
-			drawpaddle_symbol(originx+trigslow*96,originy+3*32+increasebig,96,32);
-			increasebig+=2;
+			
+			bpx=originx+trigbig*96;
+			bpy=originy+3*32+increasebig;
+			clearpaddle_symbol(bpx,bpy-2,96,32);
+			int indexx=convert_x(bpx);
+			int indexy=convert_y(bpy);
+			
+			
+			
+			if ((gamearray[indexy][indexx]==10)||(gamearray[indexy][indexx]==11)){
+							clearpaddle_symbol(bpx,bpy-2,96,32);
+							
+							receivebpaddle=1;
+							drawbigpaddle(paddlex,paddley,192,32);
+			}
+			else if (gamearray[indexy][indexx]==9){
+				clearpaddle_symbol(bpx,bpy-2,96,32);
+			}
+			else{
+				
+				drawpaddle_symbol(bpx,bpy,96,32);
+				increasebig+=2;
+			}
+			
 		}
 		else if (receivebpaddle==1) {
-			drawbigpaddle(paddlex,paddley,192,32);
+			//drawbigpaddle(paddlex,paddley,192,32);
 		}
 		
 		

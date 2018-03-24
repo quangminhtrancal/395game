@@ -23,11 +23,14 @@ int return_quitgame2(int offset_color);
 int return_startgame(int offset_color);
 int return_startgame2(int offset_color);
 
+
  void moveball(int startx, int starty);
  void drawgameinterface(int x, int y, int lx, int ly);
  void drawstart(int x, int y, int lx, int ly) ;
  void drawstart2(int x, int y, int lx, int ly)  ;
  void initialize_gamearray();
+ void drawbigpaddle(int x, int y, int lx, int ly);
+ void clearbigpaddle(int x, int y, int lx, int ly);
 
 
 //int originx=500;
@@ -76,6 +79,7 @@ int dx;
 int dy;
 int ang_valu;
 
+int receivebpaddle;// New variable for big paddle
 
 // Size of ball is 20x20
 void drawball(int x, int y, int lx, int ly){
@@ -402,7 +406,8 @@ void drabdH(int startx, int starty, int lx, int ly){
 }
 
 void leftmove(int speed){
-	clearpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==0) clearpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==1) clearbigpaddle(paddlex,paddley,192,height_paddle);
 	if (paddlex>originx) {
 		if (speed==0) 	paddlex-=1;
 		if (speed==1)	paddlex-=5;
@@ -410,19 +415,30 @@ void leftmove(int speed){
 		if (speed==3)	paddlex-=20;
 	}
 	if (paddlex<originx) paddlex=originx;
-	drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==0) drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==1) drawbigpaddle(paddlex,paddley,192,height_paddle);
 }
 
 void rightmove(int speed){
-	clearpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==0) clearpaddle(paddlex,paddley,width_paddle,height_paddle);
+	if (receivebpaddle==1) clearbigpaddle(paddlex,paddley,192,height_paddle);
 	if (paddlex<(originx+width_bg-width_paddle)) {
 		if (speed==0) 	paddlex+=1;
 		if (speed==1)	paddlex+=5;
 		if (speed==2)	paddlex+=10;
 		if (speed==3)	paddlex+=20;	
 	}
-	if (paddlex>(originx+width_bggame-width_paddle)) paddlex=originx+width_bggame-width_paddle;
-	drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+	
+	if (receivebpaddle==0) {
+		if (paddlex>(originx+width_bggame-width_paddle)) paddlex=originx+width_bggame-width_paddle;
+		drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+	}
+	else if (receivebpaddle==1) 
+	{
+		if (paddlex>(originx+width_bggame-192)) paddlex=originx+width_bggame-192; 
+		drawbigpaddle(paddlex,paddley,192,height_paddle);
+		//printmemory();
+	}
 }
 
 void drawedge1(int x, int y, int lx, int ly){
