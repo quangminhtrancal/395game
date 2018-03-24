@@ -41,6 +41,13 @@ int miny[10];
 int gamestate;
 int width_gameover=256;
 int height_gameover=256;
+int startthisgame=0;
+int trigslow=3;
+int trigbig=7;
+
+int triggerslowball;
+int triggerbigpaddle;
+
 /* To represent the memory of the tile of the game
  =0: no element
 = 10: paddle outside; 11 paddle inside
@@ -68,7 +75,7 @@ void drawwhitebrick(int x, int y, int lx, int ly);
 void printmemory();
 int convert_x(int x);
 int convert_y(int y);
- 
+void checkvaluepack();
 
 
   void initialize_gamearray(){
@@ -76,7 +83,7 @@ int convert_y(int y);
 		  for (int j=0; j<30;j++)
 		  {
 			  gamearray[i][j]=0;
-			  //if (i==18) gamearray[18][j]=11;
+			  if (i==18) gamearray[18][j]=11;
 			  if ((i==0) || (i==19)) gamearray[i][j]=9;
 
 		  }
@@ -115,6 +122,13 @@ int reversey(int indexy){
  void treatbrick(int nextx, int nexty, int category){
  	if (category==1) {
 		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
+		printf("nextx=%d nexty=%d\n",nextx,nexty);
+		if (nextx/3==trigslow) {
+			triggerslowball=1;
+		}
+		else if (nextx/3==trigbig) {
+			triggerbigpaddle=1;
+		}
 	}
 	else if (category==2) {
 		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
@@ -137,7 +151,7 @@ int convert_ycorner(int y){
  
  // Draw the ball movement
  void moveball(int startx, int starty){
- 
+		checkvaluepack();
 		clearball(prevballx,prevbally,width_ball,height_ball);
 		drawball(ballx,bally,width_ball,height_ball);
 
@@ -189,22 +203,22 @@ int convert_ycorner(int y){
 		
 		
 
-		next_xtl=convert_xcorner(next_xtl);
-		next_ytl=convert_ycorner(next_ytl);
+		next_xtl=convert_x(next_xtl);
+		next_ytl=convert_y(next_ytl);
 //		printf("real tlx=%d realt tly=%d next tlx=%d next tly=%d \n",a,b,next_xtl,next_ytl);
 
-		next_xtr=convert_xcorner(next_xtr);
-		next_ytr=convert_ycorner(next_ytr);
+		next_xtr=convert_x(next_xtr);
+		next_ytr=convert_y(next_ytr);
 
-		next_xbl=convert_xcorner(next_xbl);
-		next_ybl=convert_ycorner(next_ybl);
+		next_xbl=convert_x(next_xbl);
+		next_ybl=convert_y(next_ybl);
 
-		next_xbr=convert_xcorner(next_xbr);
-		next_ybr=convert_ycorner(next_ybr);
+		next_xbr=convert_x(next_xbr);
+		next_ybr=convert_y(next_ybr);
 		
 		
 
-	printf("real tlx=%d realt tly=%d next blx=%d next bly=%d \n",a,b,next_xbl,next_ybl);
+//	printf("real tlx=%d realt tly=%d next blx=%d next bly=%d \n",a,b,next_xbl,next_ybl);
 
 	//	printf("ballx=%d bally=%d dx=%d dy=%d tl=%d tr=%d bl=%d br=%d\n",ballx,bally,dx,dy,gamearray[next_ytl][next_xtl],gamearray[next_ytr][next_xtr],gamearray[next_ybl][next_xbl],gamearray[next_ybr][next_xbr]);
 		//printmemory();
@@ -251,7 +265,11 @@ int convert_ycorner(int y){
 			// at middle of the paddle
 		if (gamearray[next_ybl][next_xbl]==11){
 				//printf("In middle\n");
-				dy=-2*ang_valu;
+				if (startthisgame==0) {
+					dy=-ang_valu;
+					startthisgame=1;
+				}
+				else if (startthisgame==1) dy=-2*ang_valu;
 
 		}
 		

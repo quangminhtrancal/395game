@@ -76,6 +76,7 @@ int dx;
 int dy;
 int ang_valu;
 
+
 // Size of ball is 20x20
 void drawball(int x, int y, int lx, int ly){
 	int offset_color=0;
@@ -115,33 +116,7 @@ void clearball(int x, int y, int lx, int ly){
 }
 
 
-void drawslowball(int x, int y, int lx, int ly){
-	int offset_color=0;
-	int color=0;
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=return_bigpaddle(offset_color);
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-	
-}
 
-void clearslowball(int x, int y, int lx, int ly){
-	
-	int offset_color=0;
-	int color=0;
-
-	for (int i=0;i<ly;i++){
-		for (int j=0; j<lx; j++){
-			color=background;
-			DrawPixel(x+j,y+i,color);
-			offset_color+=4;
-		}
-	}
-	
-}
 
 // size of paddle is 80x20
 void drawpaddle(int x, int y, int lx, int ly){
