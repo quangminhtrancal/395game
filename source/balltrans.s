@@ -4,23 +4,28 @@
  //}
 // convert from index of brick in the array to the real x position
 // ro has indexx
-.global reversex1
-reversex1:
+.global reversex
+reversex:
 	push	{r4-r10,lr}
-	mov r1,#0
-	mov r2, #3
+	mov r9, r0	// r9=indexx
+	mov r4,#-1
+	mov r5, #3
+	mov r6, #0
 
 	checkmultiple:
-				add r1, #1
-				mul r3, r1,r2
-				cmp r0, r3  // r0 has indexx
+				add r4, #1
+				mul r6, r4, r5
+				cmp r6,r9  // r6= 3*r4
 				ble checkmultiple
-				// after this, r1 is the result of a or a+1 ??
-	mov r3, #96
-	ldr r4, =originx
-	ldr r5, [r4]    // r5=originx
-	mul r1, r3  // r1= 96*a
-	add r0, r5, r1
+				sub r4, #1
+
+	
+	ldr r8, =originx
+	ldr r5, [r8]    // r5=originx
+	mov r7, #96
+	mul r4, r7  // r4= 96*a
+	add r5, r4
+	mov r0, r5
 	
 	pop	{r4-r10,pc}
 
@@ -29,12 +34,84 @@ reversex1:
 // }
 // convert from index in the array to the real y position
 
-.global reversey1
-reversey1:
+.global reversey
+reversey:
 	push	{r4-r10,lr}
+	mov r6, r0
 	mov r3, #32
 	ldr r4, =originy
 	ldr r5, [r4]    // r5=originy
-	mul r1, r3  // r1= 32*a
-	add r0, r5, r1
+	mul r6, r3  // r1= 32*a
+	add r0, r5, r6
 	pop	{r4-r10,pc}
+
+ //int checkbrick(int brickvalue){
+//	if (brickvalue==6) return 1;
+//	else if (brickvalue==7) return 2;
+//	else if (brickvalue==8) return 3;
+//	return 0;
+ //}
+
+.global checkbrick
+checkbrick:
+	push	{r4-r10,lr}
+	mov 	r4, r0
+	cmp		r4, #6
+	moveq	r0, #1
+	beq		donecheckbrick
+	cmp		r4, #7
+	moveq	r0, #2
+	beq		donecheckbrick
+	cmp		r4, #8
+	moveq	r0, #3
+	beq		donecheckbrick
+donecheckbrick:	
+	pop	{r4-r10,pc}
+
+.global reversey
+reversey:
+	push	{r4-r10,lr}
+ 
+
+	pop	{r4-r10,pc}
+
+
+
+.global reversey
+reversey:
+	push	{r4-r10,lr}
+ 
+
+	pop	{r4-r10,pc}
+
+
+.global reversey
+reversey:
+	push	{r4-r10,lr}
+ 
+
+	pop	{r4-r10,pc}
+
+
+
+.global reversey
+reversey:
+	push	{r4-r10,lr}
+ 
+
+	pop	{r4-r10,pc}
+
+
+.global reversey
+reversey:
+	push	{r4-r10,lr}
+ 
+
+	pop	{r4-r10,pc}
+ 
+
+ 
+
+ 
+ 
+ 

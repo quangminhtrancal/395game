@@ -119,6 +119,7 @@ void clearbigpaddle(int x, int y, int lx, int ly);
  	
  }
  
+ /*
 int reversex(int indexx){
 	int a=indexx/3;
 	return (originx+a*96);
@@ -127,6 +128,7 @@ int reversey(int indexy){
 	 
 	return (originy+indexy*32);
  }
+
  
  int checkbrick(int brickvalue){
 	if (brickvalue==6) return 1;
@@ -134,11 +136,10 @@ int reversey(int indexy){
 	else if (brickvalue==8) return 3;
 	return 0;
  }
+  */ 
  void updatescores(){
 	int count=0; // count white bricks
-//	int count7=0; // count green bricks
-	//int count8=0; // count red bricks
-	
+
 	for (int j=0;j<30;j=j+3){
 		if (gamearray[3][j]==6){ count+=1;
 		}
@@ -265,7 +266,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 				if (dy<0) dy=-dy;
 			}
 		}
-		printmemory();
+		//printmemory();
 		 
 	 }
 }
@@ -661,7 +662,8 @@ void drawnum(int num,int x, int y){
 			if((gamearray[i][j]>=6) &&(gamearray[i][j]<=8)){
 				
 				int checkedvalue=checkbrick(gamearray[i][j]);
-					//printf("y_i=%d x_j=%d value=%d\n",i,j,gamearray[i][j]);
+				
+				//printf("VALUE=%d new=%d",checkbrick(gamearray[i][j]),checkbrick1(gamearray[i][j]));
 				checkcollision_ballbrick(i,j,checkedvalue);
 			}
 		  }
