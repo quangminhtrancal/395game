@@ -1,3 +1,115 @@
+// Take r0 as the offset for the image color location
+.global return_zero
+
+return_zero:
+	push	{r4, r5,lr}
+	ldr	r4, =zero
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+	
+.global return_one
+
+return_one:
+	push	{r4, r5,lr}
+	ldr	r4, =one
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+	
+	
+.global return_two
+
+return_two:
+	push	{r4, r5,lr}
+	ldr	r4, =two
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+.global return_three
+
+return_three:
+	push	{r4, r5,lr}
+	ldr	r4, =three
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_four
+
+return_four:
+	push	{r4, r5,lr}
+	ldr	r4, =four
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_five
+
+return_five:
+	push	{r4, r5,lr}
+	ldr	r4, =five
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_six
+
+return_six:
+	push	{r4, r5,lr}
+	ldr	r4, =six
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_seven
+
+return_seven:
+	push	{r4, r5,lr}
+	ldr	r4, =seven
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_eight
+
+return_eight:
+	push	{r4, r5,lr}
+	ldr	r4, =eight
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+
+.global return_nine
+
+return_nine:
+	push	{r4, r5,lr}
+	ldr	r4, =nine
+	mov	r5, r0				// save the offset
+	ldr	r0, [r4,r5]
+	
+	pop		{r4,r5,pc}
+
+.section .data
+
+
+
 .global zero
 zero:
 .ascii "CC\004\377@@\000\377@@\000\377@@\000\377@@\000\377@@\000\377@@\000\377@@\000\377@@\000\377@@\000\377"
