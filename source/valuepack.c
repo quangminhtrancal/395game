@@ -156,7 +156,7 @@ void checkvaluepack(){
 			int indexy=convert_y(sby);
 			if ((gamearray[indexy][indexx]==10)||(gamearray[indexy][indexx]==11)){
 							clearslowball_symbol(sbx,sby-2,96,32);
-							drawpaddle(paddlex,paddley,width_paddle,height_paddle);
+							drawPaddle(paddlex,paddley);
 							receiveslowball=1;
 			}
 			else if (gamearray[indexy][indexx]==9){

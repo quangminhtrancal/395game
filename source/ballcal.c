@@ -70,10 +70,10 @@ int bpy;	// check y position of big paddle symbol
 * */
 int gamearray[20][30];
 
+void clearBall(int x, int y);
 
 
-void drawball(int x, int y, int lx, int ly);
-void clearball(int x, int y, int lx, int ly);
+
 void clearbrick(int x, int y, int lx, int ly);
 void DrawPixel(int x, int y, int color);
 void drawgreenbrick(int x, int y, int lx, int ly);
@@ -127,7 +127,7 @@ int reversey(int indexy){
  }
  void treatbrick(int nextx, int nexty, int category){
  	if (category==1) {
-		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
+		clearBrick(reversex(nextx),reversey(nexty));
 
 		// Setting to define the column of white brick which has the trigger for the value pack
 		if (nextx/3==trigslow) {
@@ -138,12 +138,16 @@ int reversey(int indexy){
 		}
 	}
 	else if (category==2) {
-		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
-		drawwhitebrick(reversex(nextx),reversey(nexty),width_brick,height_brick);//draw white bricks
+		//clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
+		clearBrick(reversex(nextx),reversey(nexty));
+		//drawwhitebrick(reversex(nextx),reversey(nexty),width_brick,height_brick);//draw white bricks
+		drawBrick(reversex(nextx), reversey(nexty), 6);
 	}
 	else if (category==3) {
-		clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
-		drawgreenbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);	//draw green bricks
+		//clearbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);
+		clearBrick(reversex(nextx),reversey(nexty));
+		//drawgreenbrick(reversex(nextx),reversey(nexty),width_brick,height_brick);	//draw green bricks
+		drawBrick(reversex(nextx), reversey(nexty), 7);
 	}
  }
  int convert_xcorner(int x){
@@ -159,8 +163,9 @@ int convert_ycorner(int y){
  // Draw the ball movement
  void moveball(int startx, int starty){
 		checkvaluepack();
-		clearball(prevballx,prevbally,width_ball,height_ball);
-		drawball(ballx,bally,width_ball,height_ball);
+		clearBall(prevballx,prevbally);
+		//drawball(ballx,bally,width_ball,height_ball);
+		drawBall(ballx, bally);
 
 		printf("Speed value=%d\n",ang_valu);
 		int next_xtl;
@@ -508,9 +513,9 @@ int convert_ycorner(int y){
 		delay(5);
 		prevballx = ballx;
 		prevbally = bally;
-		//clearball(ballx,bally,width_ball,height_ball);
+
 		ballx+=dx;
 		bally+=dy;
-		//printf("Final dx=%d, dy=%d px=%d bx=%d\n",dx,dy,prevballx,ballx);
+
 	
  }
