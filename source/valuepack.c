@@ -109,15 +109,6 @@ void drawbigpaddle(int x, int y, int lx, int ly){
 			offset_color+=4;
 		}
 	}
-		// assign memory value
-	int indexx=convert_x(x);
-	int indexy=convert_y(y);
-	gamearray[indexy][indexx]=10;
-	gamearray[indexy][indexx+1]=11;
-	gamearray[indexy][indexx+2]=11;
-	gamearray[indexy][indexx+3]=11;
-	gamearray[indexy][indexx+4]=11;
-	gamearray[indexy][indexx+5]=10;	
 }
 
 void clearbigpaddle(int x, int y, int lx, int ly){

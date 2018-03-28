@@ -172,46 +172,13 @@ void draw(){
 	drawBall(ballx,bally);
 	drawPaddle(paddlex, paddley);
 	
-	
-	
-	// pivot point is originx, originy meaning 0,0
-	
-	
-	//draw_totalback(originx,originy,32,32,32);
-
-	//drawredb(originx,originy+brickgap,width_brick,height_brick);				//draw red bricks	
-	//drawgreenb(originx,originy+brickgap+height_brick,width_brick,height_brick);	//draw green bricks
-	//drawwhiteb(originx,originy+brickgap+2*height_brick,width_brick,height_brick);//draw white bricks
-
-	
-
-
-	//drawball(ballx,bally,width_ball,height_ball);								//draw ball @ start position
-
-
-
-	//drabdH(originx,originy-height_Hborder,width_Hborder,height_Hborder);	//top border
-	//drabdV(originx-width_Vborder,originy,width_Vborder,height_Vborder);		//left border
-
-	//drabdH(originx,originy+height_bggame,width_Hborder,height_Hborder);		//bottom border
-	//drabdV(originx+width_bggame,originy,width_Vborder,height_Vborder);		//right border
-	
-	//drawedge1(originx-32,originy-32,32,32);		
- 	//drawedge2(originx+width_bggame,originy-32,32,32);
- 	//drawedge3(originx-32,originy+height_bggame,32,32);
- 	//drawedge4(originx+width_bggame,originy+height_bggame,32,32);
-	
-
-	int button=0xFFFF;
+//	int button=0xFFFF;
 	int check=0;
 	int read=0;
 	int count=0;
 	int previousbutton=0;
 	int speed=0;
 	int startball=0;
-
-	
-	//initialize_ymin();
 	
 	printmemory();
 	
@@ -220,16 +187,11 @@ void draw(){
 
 
 	while(gamestate==0){
-		
-		//printf("State %d\n",gamestate);
-
 		while (check==0){
 			// if B button is pressed- ball release
-			//printf("State %d startball=%d check=%d\n",gamestate, startball, check);
 			read=readSnes();
 			if (read==65534){
 				startball=1;
-				
 			}
 			if (startball==1){
 
@@ -237,8 +199,6 @@ void draw(){
 						moveball();
 						if(gamestate==1) check=1;
 
-					
-					//if (read != 65535) printf("%d\n",read);
 					// left button
 					if (read==65471){
 						check=1;
