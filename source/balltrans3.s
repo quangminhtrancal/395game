@@ -504,6 +504,126 @@ hasbigpaddle:
 	
 donebordercheck:		
 	pop	{r4-r10,pc}
+	
+	//-------------------------------------------------------------------------------
+ 	 //	--	drawscore();
+	//	--	drawnum(lives,700,originy);
+//		clearBall(prevballx,prevbally,width_ball,height_ball);
+//		drawBall(ballx,bally,width_ball,height_ball);
+//		checkcollision_ballpaddle();
+		// iterate through all bricks
+		
+		
+ .global moveball
+ moveball:
+	push {r4-r10,lr}
+	bl updatescores
+	bl checkvaluepack
+	ldr r4, =prevballx
+	ldr r5, [r4]		//r5=prevballx
+	ldr r4, =prevbally
+	ldr r6, [r4]		//r6=prevbally
+	mov r0, r5
+	mov r1, r6
+	mov r2, #32
+	mov r3, #32
+	bl clearBall
+
+	ldr r4, =ballx
+	ldr r5, [r4]		//r5=ballx
+	ldr r4, =bally
+	ldr r6, [r4]		//r6=bally
+	mov r0, r5
+	mov r1, r6
+	mov r2, #32
+	mov r3, #32
+	bl drawBall
+	
+	bl checkcollision_ballpaddle
+	// ball and brick
+//			for (int i=1;i<4; i++){  // i for y axis
+//		  for (int j=0; j<30;j=j+3) // j for x axis
+//		  {
+//			if((gamearray[i][j]>=6) &&(gamearray[i][j]<=8)){
+//				int checkedvalue=checkbrick(gamearray[i][j]);
+//				checkcollision_ballbrick(i,j,checkedvalue);
+// index of gamearray[i][j]  -> index= i*120+j
+
+
+	mov r4, #1	// r4=i
+	mov r5, #-3	// r5=j
+	mov r10, #0	// r10 will be 4j
+	b inloop
+outloop:
+	add r4, #1
+	cmp r4, #4	// i=i+1
+	bge donebrick
+	mov r5, #-3
+	
+inloop:	
+	add r5, #3		// j=j+3
+	mov r0, #4
+	mul r10, r5, r0	// r10=4j
+	mov r6, #0
+	cmp r5, #30
+	bge outloop
+	// use r6 for index of gamearray
+	mov r7, #120
+	mul r6, r4, r7	// r6=120*i
+	add r6, r10		// r6=120*i+4j
+	ldr r7, =gamearray
+	ldr r8, [r7,r6]	// r8=gamearray[i][j]
+	cmp r8, #6
+
+	blt inloop
+	cmp r8, #8
+	bgt inloop
+	mov r0, r8
+	bl checkbrick
+	mov r9, r0	// r9 is category of brick 1,2 or 3
+	mov r0, r4	
+	mov r1, r5	
+	mov r2, r9
+	bl checkcollision_ballbrick
+	b inloop
+
+donebrick:	
+//	checkbordercollision();
+//		delay(5);
+//		prevballx = ballx;
+//		prevbally = bally;
+//		ballx+=dx;
+//		bally+=dy;
+		
+	bl checkbordercollision
+	mov r0, #5000
+	bl delayMicroseconds
+	ldr r4, =ballx
+	ldr r5, [r4]	// r5=ballx
+	ldr r4, =prevballx
+	str r5, [r4]	// prevballx=ballx
+	ldr r4, =bally
+	ldr r5, [r4]	// r5=bally
+	ldr r4, =prevbally
+	str r5, [r4]	// prevbally=bally
+	
+	ldr r4, =ballx
+	ldr r5, [r4]	// r5=ballx
+	ldr r4, =dx
+	ldr r6, [r4]	// r6=dx
+	add r5, r6		// r5=ballx+dx
+	ldr r4, =ballx
+	str	r5, [r4]	//ballx+=dx
+	
+	ldr r4, =bally
+	ldr r5, [r4]	// r5=bally
+	ldr r4, =dy
+	ldr r6, [r4]	// r6=dy
+	add r5, r6		// r5=bally+dy
+	ldr r4, =bally
+	str	r5, [r4]	//bally+=dy
+	pop	{r4-r10,pc}
+	
 
 .section .data
 

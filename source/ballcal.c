@@ -639,6 +639,7 @@ void drawnum(int num,int x, int y){
  */
 
  // Draw the ball movement
+ /*
  void moveball(){
 	 //		drawscore();
 		
@@ -669,3 +670,4 @@ void drawnum(int num,int x, int y){
 		ballx+=dx;
 		bally+=dy;
  }
+*/
