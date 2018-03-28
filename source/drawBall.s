@@ -61,7 +61,7 @@ exitOuterLoopDB:
 	mov	r0, x
 	mov	r1, y
 	mov	r2, #2
-	bl	updateArray
+	//bl	updateArray
 
 	pop	{r4-r10,pc}
 

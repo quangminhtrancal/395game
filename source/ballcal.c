@@ -36,7 +36,7 @@ int bally;
 int stop=0;
 int dx=2;
 int dy=2;
-int ang_valu=2;
+int ang_valu=4;// for normal with 45 degree: 4-4; with 60 deg: 3-5 // for slow: with 45 deg 2-2 - with 60 deg 3-1
 int miny[10];
 int gamestate;
 int width_gameover=256;
@@ -90,7 +90,7 @@ int receivebpaddle;
 void drawbigpaddle(int x, int y, int lx, int ly);
 void clearbigpaddle(int x, int y, int lx, int ly);
 
-
+/*
   void initialize_gamearray(){
 	  for (int i=0;i<20; i++){
 		  for (int j=0; j<30;j++)
@@ -103,6 +103,7 @@ void clearbigpaddle(int x, int y, int lx, int ly);
 	  }
 	  
   }
+  */ 
  // return 0 if none of the point violate; return 1 if the next point violate
   void drawgameover(int x, int y, int lx, int ly){
  	
@@ -136,7 +137,7 @@ int reversey(int indexy){
 	else if (brickvalue==8) return 3;
 	return 0;
  }
-  */ 
+ 
  void updatescores(){
 	int count=0; // count white bricks
 
@@ -152,6 +153,7 @@ int reversey(int indexy){
 		
 	}
 }
+
  void treatbrick(int nextx, int nexty, int category){
  	if (category==1) {
 		clearBrick(reversex(nextx),reversey(nexty));
@@ -174,6 +176,8 @@ int reversey(int indexy){
 	}
 	
  }
+ */ 
+ /*
  int convert_xcorner(int x){
 	 double a=(x-originx)/32;
 	return ((int) a);
@@ -183,6 +187,7 @@ int convert_ycorner(int y){
 	 double a=(y-originy)/32;
 	return ((int) a);
 }
+
 
 int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 {
@@ -200,7 +205,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 	}
 	return check;
 }
- 
+
  void checkcollision_ballbrick(int bry, int brx, int brvalue)
  {
 	 
@@ -223,8 +228,9 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 	 br=ballx+32;
 	 bt=bally;
 	 bb=bally+32;
-	 int checkbricktouch=Touching(brl,brr,brt,brb,bl,br,bt,bb);
-	 if (checkbricktouch==1){
+//	 int checkbricktouch=Touching(brl,brr,brt,brb,bl,br,bt,bb);
+	 
+	 if ((brr >= bl)&&(brl <= br)&&(brb>=bt)&&(brt<=bb)){
 		 
 		 printf("in treat brick brx=%d bry=%d value=%d\n",brx,bry,brvalue);
 
@@ -270,7 +276,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		 
 	 }
 }
- 
+  * */
  void checkcollision_ballpaddle()
  {
 	 int pl=0;
@@ -306,8 +312,9 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 	 br=ballx+32;
 	 bt=bally;
 	 bb=bally+32;
-	 int checkpaddletouch=Touching(pl,pr,pt,pb,bl,br,bt,bb);
-	 if (checkpaddletouch==1){
+	 //int checkpaddletouch=Touching(pl,pr,pt,pb,bl,br,bt,bb);
+	 if ((pr >= bl)&&(pl <= br)&&(pb>=bt)&&(pt<=bb)){
+	 
 		dy=-dy;
 		//dx=-dx;
 
@@ -320,23 +327,31 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		
 		if ((bl<(pl+firstseg))||(bl>(pl+firstseg+midseg)))  // check if collision is at the edge 45
 		{
-				// at first get 45 degree
+
+				
+				//if (startthisgame==1) {
+					if (dy>0) dy=ang_valu;
+					else dy=-ang_valu;
+
+				//}
+		}
+		else if(((bl>(pl+firstseg))&&(bl<(pl+firstseg+midseg)))){  // check if collision is at the middle 60
+							// at first get 45 degree
 				if (startthisgame==0) {
 					if (dy>0) dy=ang_valu;
 					else dy=-ang_valu;
 					startthisgame=1;
 				}
 				// the next one get 60 degree
-				else if (startthisgame==1) {
-					if (dy>0) dy=ang_valu;
-					else dy=-ang_valu;
+				else{
+					if (dy>0) dy=ang_valu+1;
+					else dy=-ang_valu-1;
 
-				}
-		}
-		else if(((bl>(pl+firstseg))&&(bl<(pl+firstseg+midseg)))){  // check if collision is at the middle 60
-				if (dy>0) dy=2*ang_valu;
-				else dy=-2*ang_valu;
-				delay(10); // delay to slow down at 60 degre
+					if (dx>0) dx=ang_valu-1;
+					else dx=-ang_valu+1;
+
+				//delay(10); // delay to slow down at 60 degre
+			}
 		}
 		
 
@@ -637,11 +652,11 @@ void drawnum(int num,int x, int y){
 
  // Draw the ball movement
  void moveball(int startx, int starty){
-		//updatescores();
+		updatescores();
 //		drawscore();
 		
 //		drawnum(lives,700,originy);
-		//printf("Score %d Lives=%d\n",scores,lives);
+	//	printf("Score %d Lives=%d\n",scores,lives);
 		checkvaluepack();
 
 		clearBall(prevballx,prevbally,width_ball,height_ball);
@@ -651,7 +666,7 @@ void drawnum(int num,int x, int y){
 		
 	
 		checkcollision_ballpaddle();
-		//printmemory();
+	//	printmemory();
 		//printf("sTART check");
 		
 		// iterate through all bricks

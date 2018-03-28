@@ -158,7 +158,7 @@ void printmemory(){
 void draw(){	
 	
 	
-	initialize_gamearray();
+	//initialize_gamearray();
 	paddlex=originx+width_bggame/2-width_paddle/2;
 	
 	paddley=originy+height_bggame-paddlegap;

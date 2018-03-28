@@ -169,7 +169,7 @@ void checkvaluepack(){
 			}
 		}
 		else if (receiveslowball==1){
-			ang_valu=1;
+			ang_valu=2;
 		}
 
 	}
