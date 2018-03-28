@@ -35,6 +35,7 @@ int convert_y(int y);
 int convert_x(int x);
 int convert_y(int y);
 int gamearray[20][30];
+int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb);
 
 
 // slow ball symbol
@@ -141,12 +142,9 @@ void clearbigpaddle(int x, int y, int lx, int ly){
 	
 }
 
-int checkpaddletouch(int bx, int xy){
-	
-}
-
 
 void checkvaluepack(){
+	printf("receive bpd=%d recevie sb=%d\n",receivebpaddle,receiveslowball);
 	if(triggerslowball==1){
 		if (receiveslowball==0){
 			sbx=originx+trigslow*96;
@@ -154,9 +152,30 @@ void checkvaluepack(){
 			clearslowball_symbol(sbx,sby-2,96,32);
 			int indexx=convert_x(sbx);
 			int indexy=convert_y(sby);
-			if ((gamearray[indexy][indexx]==10)||(gamearray[indexy][indexx]==11)){
+			
+			
+			int width=0;
+			if (triggerbigpaddle==1){
+				width=192;
+			}
+			else width=128;
+			
+			int pl=paddlex;
+			int pr=paddlex+width;
+			int pt=paddley;
+			int pb=paddley+32;
+			
+			int vl=sbx;
+			int vr=sbx+96;
+			int vt=sby;
+			int vb=sby+32;
+			
+			
+			//int touch=Touching(vl,vr,vt,vb,pl,pr,pt,pb);
+				 //int checkpaddletouch=Touching(pl,pr,pt,pb,bl,br,bt,bb);
+			if ((pr >= vl)&&(pl <= vr)&&(pb>=vt)&&(pt<=vb)){
 							clearslowball_symbol(sbx,sby-2,96,32);
-							drawPaddle(paddlex,paddley);
+							drawPaddle(paddlex,paddley,width_paddle,height_paddle);
 							receiveslowball=1;
 			}
 			else if (gamearray[indexy][indexx]==9){
@@ -169,7 +188,7 @@ void checkvaluepack(){
 			}
 		}
 		else if (receiveslowball==1){
-			ang_valu=2;
+			ang_valu=1;
 		}
 
 	}
@@ -183,9 +202,19 @@ void checkvaluepack(){
 			int indexx=convert_x(bpx);
 			int indexy=convert_y(bpy);
 			
+			int vl=bpx;
+			int vr=bpx+96;
+			int vt=bpy;
+			int vb=bpy+32;
 			
+			int pl=paddlex;
+			int pr=paddlex+128;
+			int pt=paddley;
+			int pb=paddley+32;
 			
-			if ((gamearray[indexy][indexx]==10)||(gamearray[indexy][indexx]==11)){
+			//int touch=Touching(vl,vr,vt,vb,pl,pr,pt,pb);
+
+			if ((pr >= vl)&&(pl <= vr)&&(pb>=vt)&&(pt<=vb)){
 							clearpaddle_symbol(bpx,bpy-2,96,32);
 							
 							receivebpaddle=1;
@@ -209,3 +238,5 @@ void checkvaluepack(){
 	}
 
 }
+
+	

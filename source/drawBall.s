@@ -114,7 +114,7 @@ exitOuterLoopCB:
 	mov	r0, x
 	mov	r1, y
 	mov	r2, #2
-	bl	deleteFromArray
+//	bl	deleteFromArray
 
 	pop	{r4-r10, pc}
 

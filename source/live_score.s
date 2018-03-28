@@ -20,7 +20,7 @@ updatescores:
 	mov		r5, #0	// r5=j
 
 	// index = y*width +x
-	//gamearray[3][j]  -> index=3*30+j
+	//gamearray[3][j]  -> index=3*120+j
 	mov	r6, #360
 	mov r7, #240
 	mov r8, #120

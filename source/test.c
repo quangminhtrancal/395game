@@ -24,7 +24,7 @@ int return_startgame(int offset_color);
 int return_startgame2(int offset_color);
 
 
-void moveball(int startx, int starty);
+void moveball();
 void drawgameinterface(int x, int y, int lx, int ly);
 void drawstart(int x, int y, int lx, int ly) ;
 void drawstart2(int x, int y, int lx, int ly)  ;
@@ -234,7 +234,7 @@ void draw(){
 			if (startball==1){
 
 						//printf("In moving ball\n");
-						moveball(ballx,bally);
+						moveball();
 						if(gamestate==1) check=1;
 
 					
