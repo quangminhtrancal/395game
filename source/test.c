@@ -138,13 +138,13 @@ void initialize_ymin(){
 }
 
 // Convert from x and y in the real table to the 
-int convert_x(int x){
-	return ((x-originx)/32);
-}
+//int convert_x(int x){
+//	return ((x-originx)/32);
+//}
 
-int convert_y(int y){
-	return ((y-originy)/32);
-}
+//int convert_y(int y){
+//	return ((y-originy)/32);
+//}
 void printmemory(){
 	for(int i=0; i<20; i++){
 		for (int j=0; j<30; j++){

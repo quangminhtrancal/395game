@@ -380,21 +380,6 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		int next_xbr;
 		int next_ybr;
 		
-		//int ox=convert_x(ballx);
-		//int oy=convert_y(bally);
-		/*
-		int next_xl;
-		int next_yl;
-		
-		int next_xr;
-		int next_yr;
-		
-		int next_xt;
-		int next_yt;
-		
-		int next_xb;
-		int next_yb;
-*/
 
 		next_xtl=ballx+dx;
 		next_ytl=bally+dy;
@@ -428,8 +413,6 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		next_xbr=convert_x(next_xbr);
 		next_ybr=convert_y(next_ybr);
 		
-
-		
 		if (b >originy+height_bggame-30){
 
 				
@@ -460,8 +443,6 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 						drawBall(ballx,bally,width_ball,height_ball);
 					
 					}
-
-					
 					dx=ang_valu;
 					dy=-ang_valu;
 					//startball=0;
