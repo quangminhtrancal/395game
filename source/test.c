@@ -213,7 +213,6 @@ void draw(){
 	
 	initialize_ymin();
 	
-
 	printmemory();
 	
 	dx=ang_valu;

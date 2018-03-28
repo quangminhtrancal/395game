@@ -276,7 +276,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		 
 	 }
 }
-  * */
+
  void checkcollision_ballpaddle()
  {
 	 int pl=0;
@@ -305,8 +305,6 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		pr=paddlex+plength;
 		pt=paddley;
 		pb=paddley+32;
-
-	 
 	 
 	 bl=ballx;
 	 br=ballx+32;
@@ -332,6 +330,9 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 				//if (startthisgame==1) {
 					if (dy>0) dy=ang_valu;
 					else dy=-ang_valu;
+					
+					if (dx>0) dx=ang_valu;
+					else dx=-ang_valu;
 
 				//}
 		}
@@ -350,18 +351,23 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 					if (dx>0) dx=ang_valu-1;
 					else dx=-ang_valu+1;
 
-				//delay(10); // delay to slow down at 60 degre
+				//delay(10); // delay to slow down at 60 degr
 			}
 		}
 		
 
 	 }
 	 
-
-
-	
  }
+ */
  void checkbordercollision(){
+	 		
+
+//	printf("real tlx=%d realt tly=%d next blx=%d next bly=%d \n",a,b,next_xbl,next_ybl);
+
+	//	printf("ballx=%d bally=%d dx=%d dy=%d tl=%d tr=%d bl=%d br=%d\n",ballx,bally,dx,dy,gamearray[next_ytl][next_xtl],gamearray[next_ytr][next_xtr],gamearray[next_ybl][next_xbl],gamearray[next_ybr][next_xbr]);
+		//printmemory();
+		
 		int next_xtl;
 		int next_ytl;
 		
@@ -374,9 +380,9 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		int next_xbr;
 		int next_ybr;
 		
-		int ox=convert_x(ballx);
-		int oy=convert_y(bally);
-		
+		//int ox=convert_x(ballx);
+		//int oy=convert_y(bally);
+		/*
 		int next_xl;
 		int next_yl;
 		
@@ -388,7 +394,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		
 		int next_xb;
 		int next_yb;
-
+*/
 
 		next_xtl=ballx+dx;
 		next_ytl=bally+dy;
@@ -422,12 +428,7 @@ int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb)
 		next_xbr=convert_x(next_xbr);
 		next_ybr=convert_y(next_ybr);
 		
-		
 
-//	printf("real tlx=%d realt tly=%d next blx=%d next bly=%d \n",a,b,next_xbl,next_ybl);
-
-	//	printf("ballx=%d bally=%d dx=%d dy=%d tl=%d tr=%d bl=%d br=%d\n",ballx,bally,dx,dy,gamearray[next_ytl][next_xtl],gamearray[next_ytr][next_xtr],gamearray[next_ybl][next_xbl],gamearray[next_ybr][next_xbr]);
-		//printmemory();
 		
 		if (b >originy+height_bggame-30){
 
