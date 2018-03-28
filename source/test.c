@@ -92,7 +92,7 @@ int ang_valu;
 
 int receivebpaddle;// New variable for big paddle
 
-
+/*
 void leftmove(int speed){
 	if (receivebpaddle==0) clearPaddle(paddlex, paddley);
 	if (receivebpaddle==1) clearbigpaddle(paddlex,paddley,192,height_paddle);
@@ -125,10 +125,10 @@ void rightmove(int speed){
 	{
 		if (paddlex>(originx+width_bggame-192)) paddlex=originx+width_bggame-192; 
 		drawbigpaddle(paddlex,paddley,192,height_paddle);
-		//printmemory();
 	}
 }
-
+*/
+/*
 void initialize_ymin(){
 	for(int i=0; i<10; i++){
 		miny[i]=originy+brickgap+height_brick*3;
@@ -136,7 +136,7 @@ void initialize_ymin(){
 	}
 	printf("\n");
 }
-
+*/
 // Convert from x and y in the real table to the 
 //int convert_x(int x){
 //	return ((x-originx)/32);
@@ -211,7 +211,7 @@ void draw(){
 	int startball=0;
 
 	
-	initialize_ymin();
+	//initialize_ymin();
 	
 	printmemory();
 	
