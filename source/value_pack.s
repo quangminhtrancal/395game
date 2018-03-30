@@ -230,7 +230,7 @@ check2:
 //			}
 	ldr r4, =sby
 	ldr r6, [r4]		//r6=sby
-	ldr r4, =sbx
+	ldr r4, =sbx	
 	ldr r5, [r4]  // r5=sbx
 	mov r0,r5
 	mov r1, r6

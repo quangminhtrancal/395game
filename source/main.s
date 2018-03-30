@@ -10,10 +10,7 @@ main:
 
 	bl		initSnes
 	
-
-	//bl draw
-
-	bl drawstartscreen
+	//bl drawstartscreen
 	
 
 
