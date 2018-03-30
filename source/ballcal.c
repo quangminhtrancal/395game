@@ -115,6 +115,7 @@ int return_nine(int offset_color);
   }
   */ 
  // return 0 if none of the point violate; return 1 if the next point violate
+  /*
   void drawgameover(int x, int y, int lx, int ly){
  	
  	int offset_color=0;
@@ -130,7 +131,7 @@ int return_nine(int offset_color);
  	
  }
  
- /*
+
 int reversex(int indexx){
 	int a=indexx/3;
 	return (originx+a*96);
