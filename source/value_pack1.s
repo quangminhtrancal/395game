@@ -97,12 +97,7 @@ innerLoopCP1:
 	cmp	j, paddleWidth
 	beq	exitInnerLoopCP1
 
-
-	ldr r2, =background
-	ldr r4, [r2]
-
-	
-	mov	r2, r4		// color = background
+	mov	r2, #0x00004040		// color = background
 	add	r0, x, j
 	add	r1, y, i
 
@@ -211,13 +206,8 @@ outerLoopCP3:
 innerLoopCP3:
 	cmp	j, paddleWidth
 	beq	exitInnerLoopCP3
-
-
-	ldr r2, =background
-	ldr r4, [r2]
-
 	
-	mov	r2, r4		// color = background
+	mov	r2, #0x00004040		// color = background
 	add	r0, x, j
 	add	r1, y, i
 
@@ -337,11 +327,7 @@ innerLoopCP5:
 	beq	exitInnerLoopCP5
 
 
-	ldr r4, =background
-	ldr r4, [r4]
-
-	
-	mov	r2, r4
+	mov	r2, #0x00004040		// color = background
 	add	r0, x, j
 	add	r1, y, i
 
