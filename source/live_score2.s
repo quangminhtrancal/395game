@@ -767,7 +767,7 @@ drawnum1:
 
 	ldr r1, =originx		// load value of originx to r1
 	ldr r6, [r1]		// load value of originx to r6
-	add r6, r6,#384
+	add r6, #400
 	
 	ldr r1, =originy		// load value of originy to r1
 	ldr r7, [r1]		// load value of originy to r7
@@ -786,11 +786,16 @@ drawnum2:
 
 	ldr r1, =originx		// load value of originx to r1
 	ldr r6, [r1]		// load value of originx to r6
-	add r6, r6, #416
+	add r6, #432
 	
 	ldr r1, =originy		// load value of originy to r1
 	ldr r7, [r1]		// load value of originy to r7
 	
+	mov r9, #10
+	mul r5, r9			// r5 = unit *10
+	ldr r4, =scores
+	ldr r8, [r4]
+	sub r4, r8, r5
 	mov r0, r4
 
 	mov r1, r6

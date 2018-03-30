@@ -241,6 +241,24 @@ check2:
 	b checkpaddle
 
 update_angle:
+	ldr r4, =dx
+	ldr r5, [r4]	// r5=dx
+	ldr r4, =dy
+	ldr r6, [r4]	// r6=dy
+	cmp r5, r6
+	bne xy_notequal
+	ldr r4, =dx
+	mov r5, #1
+	ldr r5, [r4]	// dx=1
+	ldr r4, =dy
+	
+	mov r5, #1
+	ldr r5, [r4]	// dy=1
+	
+	b doneangle
+xy_notequal:	
+
+doneangle:
 	ldr r4, =ang_valu
 	mov r5, #1
 	str r5, [r4]	//ang_valu=1

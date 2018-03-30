@@ -100,10 +100,15 @@ treatbrick:
 
 	mov r4, r0	// r4=nextx
 	mov r5, r1	// r5=nexty
-	mov r6, r2	// r6= category
+	ldr r1, =category
+	str	r2, [r1]
+//	mov r6, r2	// r6= category
 	
+	ldr r1, =category
+	ldr r6, [r1]		// r6=category
 	cmp r6, #1
 	bne	cate2
+	bl increase_score
 	
 	//triggerslowball=1;
 	ldr	r0, =trigslow
@@ -140,13 +145,15 @@ clear:
 	mov r1, r8
 	bl clearBrick
 
-	bl increase_score
+
 
 	b donetreatbrick
 	
 cate2:
 	//		clearBrick(reversex(nextx),reversey(nexty));
 //		drawBrick(reversex(nextx),reversey(nexty),6);//draw white bricks
+	ldr r1, =category
+	ldr r6, [r1]		// r6=category
 	cmp r6, #2
 	bne cate3
 	mov r0, r4
@@ -168,6 +175,9 @@ cate2:
 
 	b donetreatbrick
 cate3:	
+	ldr r1, =category
+	ldr r6, [r1]		// r6=category
+
 	cmp r6, #3
 	bne donetreatbrick
 	mov r0, r4
@@ -187,9 +197,7 @@ cate3:
 	mov r2, #7
 	bl drawBrick
 
-	b donetreatbrick
-	
-	b donetreatbrick
+
 donetreatbrick:
 	pop	{r4-r10,pc}
  
@@ -499,3 +507,4 @@ ballfromleft: .int 0
 minX: .int 0
 minY: .int 0
 ballfromtop: .int 0
+category: .int 0

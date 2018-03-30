@@ -505,6 +505,39 @@ hasbigpaddle:
 donebordercheck:		
 	pop	{r4-r10,pc}
 	
+	
+//------------------------------------------------------------------------------------
+ .global updateborder
+ updateborder:
+ 	push {r4-r10,lr}
+ 	mov r5, #-4	// r5 is the index
+ 	b checkloop
+startloop: 	
+	add r5, #4
+ 	ldr r4, =gamearray
+ 	mov r6, #9
+ 	str r6, [r4, r5]
+ 	
+checkloop:
+	cmp r5, #120
+	blt startloop
+
+
+ 	mov r5, #2276	// r5 is the index
+ 	b checkloop1
+startloop1: 	
+	add r5, #4
+ 	ldr r4, =gamearray
+ 	mov r6, #9
+ 	str r6, [r4, r5]
+ 	
+checkloop1:
+	cmp r5, #2400
+	blt startloop1
+	
+	
+	pop {r4-r10,pc}
+	
 	//-------------------------------------------------------------------------------
  	 //	--	drawscore();
 	//	--	drawnum(lives,700,originy);
@@ -517,8 +550,15 @@ donebordercheck:
  .global moveball
  moveball:
  	push {r4-r10,lr}
- 	
+ 	bl updateborder
  	bl updatescores
+ 	ldr r4, =scores
+ 	ldr r5, [r4]	// r5=scores
+ 	
+ 	ldr		r0, =testMsg
+ 	mov r1, r5
+	//bl printf
+	
 	bl drawscore
 	
 	ldr r4, =lives
@@ -654,3 +694,6 @@ next_xbr:	.int	0
 next_ybr:	.int	0
 a:	.int	0 // real x coordinate
 b:	.int	0 // real y coordinate
+
+testMsg:
+.ascii "score=%d\n"
