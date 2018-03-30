@@ -217,6 +217,10 @@ donetouch:
 	mov r2, #96
 	mov r3, #32
 	bl clearslowball_symbol	
+	ldr r4, =triggerslowball
+	mov r5, #0
+	str r5, [r4]	// triggerslowball=0
+	
 	b checkpaddle
 	
 check2:
@@ -455,6 +459,9 @@ donetouch1:
 	mov r2, #96
 	mov r3, #32
 	bl clearpaddle_symbol
+	ldr r4, = triggerbigpaddle
+	mov r5, #0
+	str r5, [r4]	// triggerbigpaddle=0
 	b confirmbig
 	
 check3:

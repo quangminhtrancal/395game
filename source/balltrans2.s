@@ -202,7 +202,7 @@ degree:
 //				else{
 //					if (dy>0) dy=ang_valu+1;
 //					else dy=-ang_valu-1;
-
+// FOR 60 degree
 
 
 		ldr r4, =startthisgame
@@ -211,6 +211,7 @@ degree:
 		bne degree60
 		mov r6, #1
 		str r6, [r4]	//startthisgame=1
+		
 		ldr r4, =dy
 		ldr r5, [r4]	// r5=dy
 		cmp r5, #0
@@ -219,8 +220,8 @@ degree:
 		ldr r6, [r4]	// r6= ang_valu
 		ldr r4, =dy
 		str r6, [r4]	// dy=ang_valu
-		b donetouch
-con1:		
+		b x45
+con1: // dy<0		
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #0
@@ -228,12 +229,32 @@ con1:
 		ldr r4, =dy
 		str r7, [r4]	// dy=-ang_valu
 		
+x45:
+		ldr r4, =dx
+		ldr r5, [r4]	// r5=dx
+		cmp r5, #0
+		ble con2
+		ldr r4, =ang_valu
+		ldr r6, [r4]	// r6= ang_valu
+		ldr r4, =dx
+		str r6, [r4]	// dx=ang_valu
+		b donetouch
+con2: // dx<0		
+		ldr r4, =ang_valu
+		ldr r6, [r4]	// r6= ang_valu
+		mov r7, #0
+		sub r7, r6		// r7=-ang_valu
+		ldr r4, =dy
+		str r7, [r4]	// dy=-ang_valu
+		
+		
+				
 		b donetouch
 degree60:
 		ldr r4, =dy
 		ldr r5, [r4]	// r5=dy
 		cmp r5, #0
-		ble con2
+		ble con22
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #1
@@ -241,7 +262,7 @@ degree60:
 		ldr r4, =dy
 		str r6, [r4]	// dy=ang_valu+1
 		b donetouch		
-con2:		
+con22:	// dy<0	
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #0
@@ -259,7 +280,7 @@ con2:
 		ldr r4, =dx
 		ldr r5, [r4]	// r5=dx
 		cmp r5, #0
-		ble con3
+		ble con33
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #-1
@@ -267,7 +288,7 @@ con2:
 		ldr r4, =dx
 		str r6, [r4]	// dx=ang_valu-1
 		b donetouch		
-con3:		
+con33:		// dx<0
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #0
@@ -278,7 +299,8 @@ con3:
 		str r7, [r4]	// dx=-ang_valu+1	
 		b donetouch
 		
-at_edge:		
+		
+at_edge:	// 45 degree	
 //					if (dy>0) dy=ang_valu;
 //					else dy=-ang_valu;
 //					if (dx>0) dx=ang_valu;
@@ -287,38 +309,37 @@ at_edge:
 		ldr r4, =dy
 		ldr r5, [r4]	// r5=dy
 		cmp r5, #0
-		ble con4
+		ble con3
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		ldr r4, =dy
 		str r6, [r4]	// dy=ang_valu
-		b donetouch		
-con4:		
+		b x45_2
+con3: // dy<0		
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #0
 		sub r7, r6		// r7=-ang_valu
 		ldr r4, =dy
-		str r7, [r4]	// dy=-ang_valu+1	
-		b donetouch
+		str r7, [r4]	// dy=-ang_valu
 		
+x45_2:
 		ldr r4, =dx
 		ldr r5, [r4]	// r5=dx
 		cmp r5, #0
-		ble con5
+		ble con4
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		ldr r4, =dx
 		str r6, [r4]	// dx=ang_valu
-		b donetouch		
-con5:		
+		b donetouch
+con4: // dx<0		
 		ldr r4, =ang_valu
 		ldr r6, [r4]	// r6= ang_valu
 		mov r7, #0
 		sub r7, r6		// r7=-ang_valu
-		ldr r4, =dx
-		str r7, [r4]	// dx=-ang_valu
-		b donetouch
+		ldr r4, =dy
+		str r7, [r4]	// dy=-ang_valu
 		
 donetouch:	
 	
