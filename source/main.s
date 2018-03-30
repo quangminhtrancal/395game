@@ -11,9 +11,12 @@ main:
 	bl		initSnes
 	
 
-	bl updatescores
-	//bl begingame
-	bl draw
+	//bl draw
+
+	bl drawstartscreen
+	
+
+
 
 	@ stop
 	haltLoop$:
