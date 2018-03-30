@@ -148,7 +148,7 @@ int reversey(int indexy){
 	else if (brickvalue==8) return 3;
 	return 0;
  }
- 
+
  void updatescores(){
 	int count=0; // count white bricks
 

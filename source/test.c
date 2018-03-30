@@ -146,6 +146,7 @@ void initialize_ymin(){
 //	return ((y-originy)/32);
 //}
 void printmemory(){
+	printf("\n");
 	for(int i=0; i<20; i++){
 		for (int j=0; j<30; j++){
 			printf("%d ",gamearray[i][j]);

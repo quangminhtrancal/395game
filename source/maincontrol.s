@@ -360,7 +360,7 @@ draw:
 	mov r1, r5
 	bl drawlivelabel
 	
-	 	bl updatescores
+	 	//bl updatescores
 	bl drawscore
 	
 	ldr r4, =lives

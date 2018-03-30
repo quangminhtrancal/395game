@@ -519,7 +519,7 @@ startloop:
  	str r6, [r4, r5]
  	
 checkloop:
-	cmp r5, #120
+	cmp r5, #116
 	blt startloop
 
 
@@ -551,13 +551,14 @@ checkloop1:
  moveball:
  	push {r4-r10,lr}
  	bl updateborder
- 	bl updatescores
+ //	bl updatescores
+ 	bl drawscore
  	ldr r4, =scores
  	ldr r5, [r4]	// r5=scores
  	
  	ldr		r0, =testMsg
  	mov r1, r5
-	//bl printf
+//	bl printf
 	
 	bl drawscore
 	

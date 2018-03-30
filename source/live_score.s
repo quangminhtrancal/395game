@@ -13,8 +13,8 @@
 //	}
 //}
 
-.global updatescores
-updatescores:
+.global updatescores1
+updatescores1:
 	push	{r4-r10,lr}
 	mov		r4, #0	// r4= index
 	mov		r5, #0	// r5=j
@@ -49,7 +49,7 @@ loop1:
 	add r5, #3
 	mov r4, #12
 	cmp 	r5, #30
-	blt	loop1
+	ble	loop1
 	
 	// r2=scores; r10=count
 	mov r3, #30

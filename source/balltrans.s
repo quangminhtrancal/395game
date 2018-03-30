@@ -97,6 +97,7 @@ donecheckbrick:
 
 treatbrick:
 	push	{r4-r10,lr}
+	
 
 	mov r4, r0	// r4=nextx
 	mov r5, r1	// r5=nexty
