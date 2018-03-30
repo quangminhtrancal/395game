@@ -133,7 +133,7 @@ void clearbigpaddle(int x, int y, int lx, int ly){
 	
 }
 
-
+/*
 void checkvaluepack(){
 	printf("receive bpd=%d recevie sb=%d\n",receivebpaddle,receiveslowball);
 	if(triggerslowball==1){
@@ -229,5 +229,5 @@ void checkvaluepack(){
 	}
 
 }
-
+*/
 	
