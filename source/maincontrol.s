@@ -349,6 +349,29 @@ draw:
 	mov r1, r6
 	bl drawPaddle
 	
+		// Draw information for score and live
+	ldr r4, =originy
+	ldr r5, [r4]		// r5=originy
+	mov r0, #348
+	mov r1, r5
+	bl drawscorelabel
+	
+	mov r0, #604
+	mov r1, r5
+	bl drawlivelabel
+	
+	 	bl updatescores
+	bl drawscore
+	
+	ldr r4, =lives
+	ldr r5, [r4]	// r5=lives
+	ldr r4, =originy
+	ldr r6, [r4]	// r6=originy
+	mov r0, r5
+	mov r1, #700
+	mov r2, r6
+	bl Drawnum
+	
 //	int check=0;
 //	int read=0;
 //	int count=0;

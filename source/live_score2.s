@@ -26,7 +26,7 @@ innerLoopD0:
 	beq	exitInnerLoopD0
 
 	mov	r0, cOffset
-	bl	return_score
+	bl	return_live
 
 	mov	r2, r0
 	add	r0, x, j
@@ -106,15 +106,10 @@ exitOuterLoopD01:
 Drawnum:
 	push	{r4-r10,lr}
 	
-	
 
-	num		.req	r4
-	x		.req	r5
-	y		.req    r6
-
-	mov	num, r0		// num = r0
-	mov	x, r1		// x = r1
-	mov y, r2		// y = r2
+	mov	r4, r0		// num = r0
+	mov	r5, r1		// x = r1
+	mov r6, r2		// y = r2
 	
 	
 if0:
@@ -127,7 +122,7 @@ if0:
 	bl Draw0
 	
 if1:
-	cmp r4, #0
+	cmp r4, #1
 	bne if2
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -135,7 +130,7 @@ if1:
 
 	bl Draw1
 if2:
-	cmp r4, #0
+	cmp r4, #2
 	bne if3
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -144,7 +139,7 @@ if2:
 	bl Draw2
 	
 if3:
-	cmp r4, #0
+	cmp r4, #3
 	bne if4
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -152,7 +147,7 @@ if3:
 
 	bl Draw3	
 if4:
-	cmp r4, #0
+	cmp r4, #4
 	bne if5
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -161,7 +156,7 @@ if4:
 	bl Draw4		
 
 if5:
-	cmp r4, #0
+	cmp r4, #5
 	bne if6
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -169,7 +164,7 @@ if5:
 
 	bl Draw5		
 if6:
-	cmp r4, #0
+	cmp r4, #6
 	bne if7
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -177,7 +172,7 @@ if6:
 
 	bl Draw6
 if7:
-	cmp r4, #0
+	cmp r4, #7
 	bne if8
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -185,7 +180,7 @@ if7:
 
 	bl Draw7
 if8:
-	cmp r4, #0
+	cmp r4, #8
 	bne if9
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -194,7 +189,7 @@ if8:
 	bl Draw8
 
 if9:
-	cmp r4, #0
+	cmp r4, #9
 	bne exit
 	
 	mov r0, r5		// moving r5(x) into r0
@@ -778,10 +773,12 @@ drawnum1:
 	ldr r7, [r1]		// load value of originy to r7
 
 	mov r0, r5 		// r0 = num1
+
 	mov r1, r6		// r1 = originx+384
 	mov r2, r7		// r2 = originy
 	
 	bl Drawnum
+
 	
 	
 	
@@ -795,8 +792,11 @@ drawnum2:
 	ldr r7, [r1]		// load value of originy to r7
 	
 	mov r0, r4
+
 	mov r1, r6
 	mov r2, r7
+	bl Drawnum
+
 
 exit1:
 	pop	{r4-r10,pc}

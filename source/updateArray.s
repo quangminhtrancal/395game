@@ -138,8 +138,10 @@ deleteType:
 	cmp	loopCounter, i
 	beq	deleteComplete	
 
-	ldr	r1, =gamearray
-	str	type, [r1, r2]
+	ldr	    r1, =gamearray
+//	ldr 	r5, [r1]
+    cmp     r1, #9
+	strne   type, [r1, r2]
 
 	add	loopCounter, #1
 	add	r2, #4

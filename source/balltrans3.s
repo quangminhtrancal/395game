@@ -516,8 +516,22 @@ donebordercheck:
 		
  .global moveball
  moveball:
-	push {r4-r10,lr}
-	bl updatescores
+ 	push {r4-r10,lr}
+ 	
+ 	bl updatescores
+	bl drawscore
+	
+	ldr r4, =lives
+	ldr r5, [r4]	// r5=lives
+	ldr r4, =originy
+	ldr r6, [r4]	// r6=originy
+	mov r0, r5
+	mov r1, #700
+	mov r2, r6
+	bl Drawnum
+	
+
+	
 	bl checkvaluepack
 	ldr r4, =prevballx
 	ldr r5, [r4]		//r5=prevballx
