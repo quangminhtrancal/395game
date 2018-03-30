@@ -691,7 +691,14 @@ nextleft:
 
 
 next5:
-
+		//cmp read, #65527
+	ldr r4, =Startpress
+	ldr r9, [r4]		// r9=Startpress
+	ldr r4, =read
+	ldr r10, [r4]		// r10=read
+	cmp r10, r9
+	bne donestartball
+	
 
 donestartball:
 	mov r0, #5000
@@ -728,6 +735,7 @@ Lpress: .int 	65471
 Rpress: .int 	65407
 ARpress: .int 	65151
 ALpress: .int 	65215
+Startpress: .int 	65527
 Resetpress: .int 	65535
 check: .int 	0
 read: .int 	0

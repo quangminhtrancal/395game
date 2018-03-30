@@ -131,23 +131,39 @@ deleteFromArray:
 
 	mov	r1, r2
 	mov	loopCounter, #0
-	mov	type, #0
 	
 deleteType:
 
 	cmp	loopCounter, i
-	beq	deleteComplete	
+	beq	deleteComplete
 
-	ldr	    r1, =gamearray
-//	ldr 	r5, [r1]
-    cmp     r1, #9
-	strne   type, [r1, r2]
+	ldr	r1, =gamearray
+	ldr 	r5, [r1, r2]
+
+
+
+    	cmp     r5, #9
+	mov	r0, #0
+	strne   r0, [r1, r2]
+
+	cmp	r5, #8
+	mov	r0, #7
+	streq	r0, [r1, r2]
+
+	cmp	r5, #7
+	mov	r0, #6
+	streq	r0, [r1, r2]
+
+	cmp	r5, #6
+	mov	r0, #0
+	streq	r0, [r1, r2]
 
 	add	loopCounter, #1
 	add	r2, #4
 
 	b	deleteType
 
+	bl	printmemory
 deleteComplete:
 
 	pop	{r4-r10, pc}
