@@ -63,8 +63,8 @@ exitOuterLoopDP:
 //------------------------------------------------------------------
 
 
-.global clearBigpaddle_symbol
-clearbigpaddle_symbol:
+.global clearbigpaddle
+clearbigpaddle:
 
 	push	{r4-r10,lr}
 	
@@ -87,15 +87,15 @@ clearbigpaddle_symbol:
 	mov	cOffset, #0
 	mov	i, #0
 
-outerLoopCP:
+outerLoopCP1:
 	cmp	i, paddleHeight
-	beq	exitOuterLoopCP
+	beq	exitOuterLoopCP1
 
 	mov	j, #0
 
-innerLoopCP:
+innerLoopCP1:
 	cmp	j, paddleWidth
-	beq	exitInnerLoopCP
+	beq	exitInnerLoopCP1
 
 
 	ldr r2, =background
@@ -111,20 +111,20 @@ innerLoopCP:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopCP
+	b	innerLoopCP1
 
-exitInnerLoopCP:
+exitInnerLoopCP1:
 	add	i, #1
-	b	outerLoopCP
+	b	outerLoopCP1
 	
 
-exitOuterLoopCP:
+exitOuterLoopCP1:
 
 	pop	{r4-r10,pc}
-
+//-------------------------------------------------------
 
 .global drawpaddle_symbol
-drawPaddle_symbol:
+drawpaddle_symbol:
 	push	{r4-r10,lr}
 	x		.req	r4
 	y		.req	r5
@@ -142,15 +142,15 @@ drawPaddle_symbol:
 	mov	cOffset, #0
 	mov	i, #0
 
-outerLoopDP:
+outerLoopDP2:
 	cmp	i, paddleHeight
-	beq	exitOuterLoopDP
+	beq	exitOuterLoopDP2
 
 	mov	j, #0
 
-innerLoopDP:
+innerLoopDP2:
 	cmp	j, paddleWidth
-	beq	exitInnerLoopDP
+	beq	exitInnerLoopDP2
 
 	mov	r0, cOffset
 	bl	return_bigpaddle
@@ -164,22 +164,22 @@ innerLoopDP:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopDP
+	b	innerLoopDP2
 
-exitInnerLoopDP:
+exitInnerLoopDP2:
 	add	i, #1
-	b	outerLoopDP
+	b	outerLoopDP2
 	
 
-exitOuterLoopDP:
+exitOuterLoopDP2:
 
 	pop	{r4-r10,pc}
 
-
+//--------------------------------------------------
 
 
 .global clearpaddle_symbol
-clearPaddle_symbol:
+clearpaddle_symbol:
 
 	push	{r4-r10,lr}
 	
@@ -202,15 +202,15 @@ clearPaddle_symbol:
 	mov	cOffset, #0
 	mov	i, #0
 
-outerLoopCP:
+outerLoopCP3:
 	cmp	i, paddleHeight
-	beq	exitOuterLoopCP
+	beq	exitOuterLoopCP3
 
 	mov	j, #0
 
-innerLoopCP:
+innerLoopCP3:
 	cmp	j, paddleWidth
-	beq	exitInnerLoopCP
+	beq	exitInnerLoopCP3
 
 
 	ldr r2, =background
@@ -226,14 +226,14 @@ innerLoopCP:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopCP
+	b	innerLoopCP3
 
-exitInnerLoopCP:
+exitInnerLoopCP3:
 	add	i, #1
-	b	outerLoopCP
+	b	outerLoopCP3
 	
 
-exitOuterLoopCP:
+exitOuterLoopCP3:
 
 	pop	{r4-r10,pc}
 
@@ -255,7 +255,7 @@ exitOuterLoopCP:
 @}
 
 .global drawslowball_symbol
-drawSlowball_symbol:
+drawslowball_symbol:
 	push	{r4-r10,lr}
 	x		.req	r4
 	y		.req	r5
@@ -273,15 +273,15 @@ drawSlowball_symbol:
 	mov	cOffset, #0
 	mov	i, #0
 
-outerLoopDP:
+outerLoopDP4:
 	cmp	i, slowballHeight
-	beq	exitOuterLoopDP
+	beq	exitOuterLoopDP4
 
 	mov	j, #0
 
-innerLoopDP:
+innerLoopDP4:
 	cmp	j, slowballWidth
-	beq	exitInnerLoopDP
+	beq	exitInnerLoopDP4
 
 	mov	r0, cOffset
 	bl	return_slowball
@@ -295,25 +295,21 @@ innerLoopDP:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopDP
+	b	innerLoopDP4
 
-exitInnerLoopDP:
+exitInnerLoopDP4:
 	add	i, #1
-	b	outerLoopDP
+	b	outerLoopDP4
 	
 
-exitOuterLoopDP:
+exitOuterLoopDP4:
 
 	pop	{r4-r10,pc}
-
+//-------------------------------------------
 
 .global clearslowball_symbol
-clearSlowball_symbol:
+clearslowball_symbol:
 	push	{r4-r10,lr}
-	
-	
-	
-
 	x		.req	r4
 	y		.req	r5
 	slowballWidth	.req	r6
@@ -330,15 +326,15 @@ clearSlowball_symbol:
 	mov	cOffset, #0
 	mov	i, #0
 
-outerLoopCP:
+outerLoopCP5:
 	cmp	i, slowballHeight
-	beq	exitOuterLoopCP
+	beq	exitOuterLoopCP5
 
 	mov	j, #0
 
-innerLoopCP:
+innerLoopCP5:
 	cmp	j, slowballWidth
-	beq	exitInnerLoopCP
+	beq	exitInnerLoopCP5
 
 
 	ldr r4, =background
@@ -354,14 +350,14 @@ innerLoopCP:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopCP
+	b	innerLoopCP5
 
-exitInnerLoopCP:
+exitInnerLoopCP5:
 	add	i, #1
-	b	outerLoopCP
+	b	outerLoopCP5
 	
 
-exitOuterLoopCP:
+exitOuterLoopCP5:
 
 	pop	{r4-r10,pc}
 

@@ -1,6 +1,5 @@
 // Take r0 as the offset for the image color location
 .global return_zero
-
 return_zero:
 	push	{r4, r5,lr}
 	ldr	r4, =zero
@@ -10,7 +9,6 @@ return_zero:
 	pop		{r4,r5,pc}
 	
 .global return_one
-
 return_one:
 	push	{r4, r5,lr}
 	ldr	r4, =one

@@ -1,5 +1,5 @@
-.global drawLivelabel
-drawLivelabel:
+.global drawlivelabel
+drawlivelabel:
 	push	{r4-r10,lr}
 	
 	x		.req	r4
@@ -49,8 +49,8 @@ exitOuterLoopD0:
 	pop	{r4-r10,pc}
 ////------------------------------
 
-.global drawScorelabel
-drawScorelabel:
+.global drawscorelabel
+drawscorelabel:
 	push	{r4-r10,lr}
 	
 	x		.req	r4
@@ -66,15 +66,15 @@ drawScorelabel:
 	mov	cOffset, #0		// cOffset = r10
 	mov	i, #0			// i - 0 
 
-outerLoopD0:
+outerLoopD01:
 	cmp	i, #32
-	beq	exitOuterLoopD0
+	beq	exitOuterLoopD01
 
 	mov	j, #0
 
-innerLoopD0:
+innerLoopD01:
 	cmp	j, #96
-	beq	exitInnerLoopD0
+	beq	exitInnerLoopD01
 
 	mov	r0, cOffset
 	bl	return_score
@@ -88,14 +88,14 @@ innerLoopD0:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopD0
+	b	innerLoopD01
 
-exitInnerLoopD0:
+exitInnerLoopD01:
 	add	i, #1
-	b	outerLoopD0
+	b	outerLoopD01
 	
 
-exitOuterLoopD0:
+exitOuterLoopD01:
 
 	pop	{r4-r10,pc}
 //--------------------------------------
@@ -208,10 +208,6 @@ exit:
 .global Draw0
 Draw0:
 	push	{r4-r10,lr}
-	
-	
-	
-
 	x		.req	r4
 	y		.req	r5
 	i		.req	r8
@@ -225,15 +221,15 @@ Draw0:
 	mov	cOffset, #0		// cOffset = r10
 	mov	i, #0			// i - 0 
 
-outerLoopD0:
+outerLoopD00:
 	cmp	i, #32
-	beq	exitOuterLoopD0
+	beq	exitOuterLoopD00
 
 	mov	j, #0
 
-innerLoopD0:
+innerLoopD00:
 	cmp	j, #32
-	beq	exitInnerLoopD0
+	beq	exitInnerLoopD00
 
 	mov	r0, cOffset
 	bl	return_zero
@@ -247,14 +243,14 @@ innerLoopD0:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopD0
+	b	innerLoopD00
 
-exitInnerLoopD0:
+exitInnerLoopD00:
 	add	i, #1
-	b	outerLoopD0
+	b	outerLoopD00
 	
 
-exitOuterLoopD0:
+exitOuterLoopD00:
 
 	pop	{r4-r10,pc}
 	
@@ -280,15 +276,15 @@ Draw1:
 	mov	cOffset, #0		// cOffset = r10
 	mov	i, #0			// i - 0 
 
-outerLoopD1:
+outerLoopD11:
 	cmp	i, #32
-	beq	exitOuterLoopD1
+	beq	exitOuterLoopD11
 
 	mov	j, #0
 
-innerLoopD1:
+innerLoopD11:
 	cmp	j, #32
-	beq	exitInnerLoopD1
+	beq	exitInnerLoopD11
 
 	mov	r0, cOffset
 	bl	return_one
@@ -302,14 +298,14 @@ innerLoopD1:
 	add	cOffset, #4
 
 	add	j, #1
-	b	innerLoopD1
+	b	innerLoopD11
 
-exitInnerLoopD1:
+exitInnerLoopD11:
 	add	i, #1
-	b	outerLoopD1
+	b	outerLoopD11
 	
 
-exitOuterLoopD1:
+exitOuterLoopD11:
 
 	pop	{r4-r10,pc}
 	
@@ -752,8 +748,8 @@ exitOuterLoopD9:
 
 
  
- .global drawScore
-drawScore:
+ .global drawscore
+drawscore:
 	push	{r4-r10,lr}
 	
 
@@ -802,7 +798,7 @@ drawnum2:
 	mov r1, r6
 	mov r2, r7
 
-exit:
+exit1:
 	pop	{r4-r10,pc}
 	
 

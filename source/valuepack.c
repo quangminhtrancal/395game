@@ -37,7 +37,7 @@ int convert_y(int y);
 int gamearray[20][30];
 int Touching(int al, int ar, int at, int ab, int bl, int br, int bt, int bb);
 
-
+/*
 // slow ball symbol
 void drawslowball_symbol(int x, int y, int lx, int ly){
 	int offset_color=0;
@@ -132,7 +132,7 @@ void clearbigpaddle(int x, int y, int lx, int ly){
 	}
 	
 }
-
+*/
 /*
 void checkvaluepack(){
 	printf("receive bpd=%d recevie sb=%d\n",receivebpaddle,receiveslowball);
