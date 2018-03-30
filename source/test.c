@@ -154,38 +154,28 @@ void printmemory(){
 	}
 
 }
-
+/*
 void draw(){	
-	
-	
 	//initialize_gamearray();
 	paddlex=originx+width_bggame/2-width_paddle/2;
-	
 	paddley=originy+height_bggame-paddlegap;
 	ballx=originx+width_bggame/2-width_ball/2;
 	bally=paddley-32;
-	
-	
 	drawBackground();
 	initializeBricks(originx, originy+brickgap);
 	drawBorder();
 	drawBall(ballx,bally);
 	drawPaddle(paddlex, paddley);
-	
 //	int button=0xFFFF;
+//	printmemory();
 	int check=0;
 	int read=0;
 	int count=0;
 	int previousbutton=0;
 	int speed=0;
 	int startball=0;
-	
-	printmemory();
-	
 	dx=ang_valu;
 	dy=ang_valu;
-
-
 	while(gamestate==0){
 		while (check==0){
 			// if B button is pressed- ball release
@@ -206,7 +196,7 @@ void draw(){
 						speed=0;
 						leftmove(speed);
 						read=0xFFFF;
-						speed=0;
+						//speed=0;
 					}
 					// right button is clicked
 					else if (read==65407){
@@ -252,16 +242,11 @@ void draw(){
 						speed=0;
 						previousbutton=65215;	
 					}
-
 					delay(5);
-						
 			}
-
-			
 		}
 		check=0;
 	}
-	
 	
 	//A- 65279
 	//B- 65534
@@ -272,3 +257,4 @@ void draw(){
 	
 	
 }
+*/
